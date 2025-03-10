@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>LA筆記:(六)Diagonal,Triangular and Symmetric matrices · Roy's Blog</title><meta name="description" content="前言
+本篇關於對角線矩陣、三角形矩陣、對稱矩陣的定義及他們的性質。這三種矩陣都是建立在方陣的前提下，是方陣的一種特殊形式。
+Diagonal matrix(對角線矩陣)
+Def:
+
+A square matrix D is called a diagonal matrix if Dij ="><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>LA筆記:(六)Diagonal,Triangular and Symmetric matrices</a></h3></div><div class="post-content"><h2 id="前言">前言</h2>
+<p>本篇關於對角線矩陣、三角形矩陣、對稱矩陣的定義及他們的性質。這三種矩陣都是建立在方陣的前提下，是方陣的一種特殊形式。</p>
+<h2 id="diagonal-matrix對角線矩陣">Diagonal matrix(對角線矩陣)</h2>
+<p>Def:</p>
+<blockquote>
+<p>A square matrix D is called a diagonal matrix if Dij = 0 for all
+i≠j.</p>
+<p>除了對角線上，其他元素都為0的方陣叫做對角線矩陣。</p>
+</blockquote>
+<p>Properties of Diagonal matrix:</p>
+<ul>
+<li><p>對角線矩陣做n次冪運算的結果，為對角線上元素分別做n次冪運算，其他位置元素依舊為0.</p></li>
+<li><p>對角線矩陣的可逆判斷條件：A n-by-n diagonal matrix D is
+invertible if and only if Dii≠0 for all 1&lt;= i &lt;=n.
+對角線上元素全部不為0時，對角線矩陣可逆。對角線可逆則其對角線元素全部不為0.</p></li>
+</ul>
+<hr />
+<h2 id="triangular-matrix三角形矩陣">Triangular matrix(三角形矩陣)</h2>
+<p>Def:</p>
+<blockquote>
+<p>A square matrix A is called a upper triangular matrix if Aij = 0 for
+all i &gt; j.</p>
+<p>A square matrix A is called a lower triangular matrix if Aij = 0 for
+all i &lt; j.</p>
+</blockquote>
+<h4 id="三角形矩陣可逆判斷條件">三角形矩陣可逆判斷條件</h4>
+<blockquote>
+<p>A triangular matrix is invertible if and only if its diagonal entry
+are all nonzeros.與對角線矩陣可逆判斷的條件相同。</p>
+</blockquote>
+<hr />
+<h2 id="symmetric對稱矩陣">Symmetric(對稱矩陣)</h2>
+<p>Def:</p>
+<blockquote>
+<p>A square matrix A is said to be symmetric if A = A^T (Aij = Aji for
+all i,j)</p>
+<p>轉置矩陣等於自身的方陣稱謂對稱矩陣。</p>
+</blockquote>
+<h4 id="對稱矩陣一些性質">對稱矩陣一些性質</h4>
+<blockquote>
+<p>if A and B are symmetric matrices of the same size and k is a scalar,
+then</p>
+<p>&lt;a&gt;A^T is symmetric &lt;b&gt;A+B and A-B are symmetric
+&lt;c&gt;kA is symmetric</p>
+</blockquote>
+<p><strong>注意：A,B兩方陣分別對稱但矩陣（A·B）不一定對稱</strong></p>
+<blockquote>
+<p>(A·B)^T = B^T · A^T = BA ≠ AB</p>
+</blockquote>
+<h4
+id="兩對稱矩陣的乘積矩陣仍對稱的條件">兩對稱矩陣的乘積矩陣仍對稱的條件</h4>
+<blockquote>
+<p>The product of two symmetric matrices is symmetric if and only if the
+matrices are commutative.</p>
+<p>只有在兩方陣可以交換的條件下，其乘積矩陣才對稱。</p>
+</blockquote>
+<h4 id="可逆對稱矩陣的逆矩陣對稱">可逆對稱矩陣的逆矩陣對稱。</h4>
+<blockquote>
+<p>If A is an invertible and symmetric matrix, then A^-1 is
+symmetric.</p>
+</blockquote>
+<p><strong>Proof:</strong></p>
+<blockquote>
+<p>(A<sup>-1)</sup>T = (A<sup>T)</sup>-1 = A^-1</p>
+</blockquote>
+<p>證明思路：套用對稱矩陣的定義（轉置矩陣為本身的方陣）證明</p>
+<h4
+id="用普通矩陣構造出對稱矩陣的方法">用普通矩陣構造出對稱矩陣的方法</h4>
+<blockquote>
+<p>let A be a matrix(need not square), then A · A^T and A^T · A is
+symmetric.</p>
+</blockquote>
+<p><strong>proof:</strong></p>
+<blockquote>
+<p>(A·A<sup>T)</sup>T = (A<sup>T)</sup>T · A^T = A · A^T and (A^T · A)^T
+= A^T · (A<sup>T)</sup>T = A^T · A</p>
+</blockquote>
+<p>證明思路：套用對稱矩陣的定義（轉置矩陣為本身的方陣）證明</p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-03-28</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Linear-Algebra/" title="Linear Algebra">Linear Algebra </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/03/28/LA筆記-六-Diagonal-Triangular-and-Symmetric-matrices/,Roy's Blog,LA筆記:(六)Diagonal,Triangular and Symmetric matrices,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/03/30/%E6%A9%9F%E7%8E%87%E7%B5%B1%E8%A8%88%E7%AD%86%E8%A8%98-%E4%B8%89-%E6%A2%9D%E4%BB%B6%E6%A9%9F%E7%8E%87%E3%80%81%E8%B2%9D%E6%B0%8F%E5%AE%9A%E7%90%86%E8%88%87%E7%8D%A8%E7%AB%8B%E4%BA%8B%E4%BB%B6/" title="機率統計筆記:(三)條件機率，貝氏定理，相互獨立事件">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/03/27/LA%E7%AD%86%E8%A8%98-%E4%BA%94-More-on-linear-system-and-Invertible-matrices/" title="LA筆記:(五)More on linear system and Invertible matrices">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

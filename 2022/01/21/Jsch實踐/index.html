@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>Jsch實踐 · Roy's Blog</title><meta name="description" content="前言
+這學期上老師的PCS課程時，最後的Final
+Project要我們用SMS系統下指令來實現一些創意。和組員商量了下後決定用手機SMS下指令達成秘鑰對生成與自動分發，我們以SSH密鑰對連線為例。我負責收到指令後自動產生密鑰對，將公鑰自動寫入目標連線機器，將私鑰以SM回傳。在查閱了資料後，我決"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Jsch實踐</a></h3></div><div class="post-content"><h2 id="前言">前言</h2>
+<p>這學期上老師的PCS課程時，最後的Final
+Project要我們用SMS系統下指令來實現一些創意。和組員商量了下後決定用手機SMS下指令達成秘鑰對生成與自動分發，我們以SSH密鑰對連線為例。我負責收到指令後自動產生密鑰對，將公鑰自動寫入目標連線機器，將私鑰以SM回傳。在查閱了資料後，我決定用Jsch完成這一自動化過程。</p>
+<hr>
+<h2 id="jsch介紹">Jsch介紹</h2>
+<blockquote>
+<p>JSch is a pure Java implementation of SSH2.JSch allows you to connect
+to an sshd server and use port forwarding, X11 forwarding, file
+transfer, etc., and you can integrate its functionality into your own
+Java programs.</p>
+</blockquote>
+<hr>
+<h2 id="安裝">安裝</h2>
+<p>可以直接從官網上下載jar包後導入即可使用： <a target="_blank" rel="noopener" href="http://www.jcraft.com/jsch/">見</a></p>
+<hr>
+<h2 id="實踐">實踐</h2>
+<p>這邊主要有兩部分的工作，一部分是jsch內置的函數完成key
+pair的生成，還有一部分是使用jsch連接上遠程的伺服器並執行命令將Public
+key放入指定位置。</p>
+<h3 id="生成keypair">生成KeyPair</h3>
+<p>這邊就是調用KeyPair.genKeyPair()這一函數產生密鑰對，然後寫出秘鑰文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">genkey</span><span class="params">(String Uid_h)</span> {</span><br><span class="line">    <span class="type">String</span> <span class="variable">filename</span> <span class="operator">=</span> <span class="string">"id_rsa"</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">comment</span> <span class="operator">=</span> <span class="string">""</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">privatekeystring</span> <span class="operator">=</span> <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">JSch</span> <span class="variable">jsch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSch</span>();</span><br><span class="line"></span><br><span class="line">    <span class="type">byte</span>[] passphrase = Uid_h.getBytes(StandardCharsets.UTF_8);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        <span class="comment">//Genkey</span></span><br><span class="line">        <span class="type">KeyPair</span> <span class="variable">kpair</span> <span class="operator">=</span> KeyPair.genKeyPair(jsch, KeyPair.RSA);</span><br><span class="line"></span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">S1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        kpair.writePrivateKey(S1, passphrase);</span><br><span class="line">        <span class="comment">//kpair.writePrivateKey("id_rsa",passphrase);</span></span><br><span class="line">        privatekeystring = S1.toString();</span><br><span class="line">        <span class="comment">//System.out.println(privatekeystring);</span></span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">"./id_rsa"</span>);</span><br><span class="line">        <span class="type">PrintStream</span> <span class="variable">ps</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PrintStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(file));</span><br><span class="line">        ps.println(privatekeystring);</span><br><span class="line"></span><br><span class="line">        kpair.writePublicKey(filename + <span class="string">".pub"</span>, comment);</span><br><span class="line">        System.out.println(<span class="string">"Finger print: "</span> + kpair.getFingerPrint());</span><br><span class="line">        kpair.dispose();</span><br><span class="line">        <span class="type">File</span> <span class="variable">pvtKey</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">"keypair"</span>);</span><br><span class="line">        pvtKey.setWritable(<span class="literal">false</span>);</span><br><span class="line">        </span><br><span class="line">    } <span class="keyword">catch</span> (Exception e) {</span><br><span class="line">        System.out.println(e);</span><br><span class="line">    } <span class="keyword">finally</span> {</span><br><span class="line">        <span class="keyword">return</span> privatekeystring;</span><br><span class="line">    }</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="連接遠端機器執行寫入命令">連接遠端機器執行寫入命令</h3>
+<p>這邊大致的流程就是：設置連接參數與要執行的命令-&gt;建立session連接-&gt;記錄可能出現的錯誤並返回</p>
+<h2 id="section"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">uploadkey</span><span class="params">()</span> <span class="keyword">throws</span> JSchException, InterruptedException, IOException {</span><br><span class="line">       <span class="type">ChannelExec</span> <span class="variable">channelExec</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">       <span class="type">BufferedReader</span> <span class="variable">inputStreamReader</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">       <span class="type">BufferedReader</span> <span class="variable">errInputStreamReader</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">       <span class="type">StringBuilder</span> <span class="variable">runLog</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">""</span>);</span><br><span class="line">       <span class="type">StringBuilder</span> <span class="variable">errLog</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">""</span>);</span><br><span class="line">       <span class="type">JSch</span> <span class="variable">jsch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSch</span>();</span><br><span class="line">       <span class="type">Session</span> <span class="variable">session</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="keyword">try</span> {</span><br><span class="line"></span><br><span class="line">           <span class="comment">//設定連接的賬號密碼port</span></span><br><span class="line">           <span class="type">String</span> <span class="variable">USER</span> <span class="operator">=</span> <span class="string">""</span>;</span><br><span class="line">           <span class="type">String</span> <span class="variable">PASSWORD</span> <span class="operator">=</span> <span class="string">""</span>;</span><br><span class="line">           <span class="type">String</span> <span class="variable">HOST</span> <span class="operator">=</span> <span class="string">""</span>;</span><br><span class="line">           <span class="type">int</span> <span class="variable">DEFAULT_SSH_PORT</span> <span class="operator">=</span>;</span><br><span class="line">           <span class="type">String</span> <span class="variable">cmd</span> <span class="operator">=</span> <span class="string">""</span>; <span class="comment">//命令</span></span><br><span class="line"></span><br><span class="line">           <span class="comment">//建構命令</span></span><br><span class="line">           cmd = getcmd();</span><br><span class="line">          </span><br><span class="line">           cmd = <span class="string">"echo "</span> + cmd + <span class="string">" &gt;&gt; /ssd/labguest/.ssh/authorized_keys"</span>;</span><br><span class="line"></span><br><span class="line">           session = jsch.getSession(USER, HOST, DEFAULT_SSH_PORT);</span><br><span class="line">           session.setPassword(PASSWORD);</span><br><span class="line">           session.setConfig(<span class="string">"StrictHostKeyChecking"</span>, <span class="string">"no"</span>);</span><br><span class="line">           session.connect();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">           channelExec = (ChannelExec) session.openChannel(<span class="string">"exec"</span>);</span><br><span class="line"></span><br><span class="line">           <span class="comment">//channelExec.setCommand("ifconfig;");</span></span><br><span class="line">           channelExec.setCommand(cmd);</span><br><span class="line">           channelExec.connect();</span><br><span class="line"></span><br><span class="line">           <span class="comment">//獲取標準輸入流</span></span><br><span class="line">           inputStreamReader = <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(channelExec.getInputStream()));</span><br><span class="line">           <span class="comment">//獲取標準錯誤輸入流</span></span><br><span class="line">           errInputStreamReader = <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(channelExec.getErrStream()));</span><br><span class="line"></span><br><span class="line">           <span class="comment">//記錄命令執行 log</span></span><br><span class="line">           <span class="type">String</span> <span class="variable">line</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">           <span class="keyword">while</span> ((line = inputStreamReader.readLine()) != <span class="literal">null</span>) {</span><br><span class="line">               runLog.append(line).append(<span class="string">"\n"</span>);</span><br><span class="line">           }</span><br><span class="line"></span><br><span class="line">           <span class="comment">//記錄命令執行錯誤 log</span></span><br><span class="line">           <span class="type">String</span> <span class="variable">errLine</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">           <span class="keyword">while</span> ((errLine = errInputStreamReader.readLine()) != <span class="literal">null</span>) {</span><br><span class="line">               errLog.append(errLine).append(<span class="string">"\n"</span>);</span><br><span class="line">           }</span><br><span class="line"></span><br><span class="line">           <span class="comment">//輸出 shell 命令執行紀錄檔</span></span><br><span class="line">           System.out.println(<span class="string">"exitStatus="</span> + channelExec.getExitStatus() + <span class="string">", openChannel.isClosed="</span></span><br><span class="line">                   + channelExec.isClosed());</span><br><span class="line">           System.out.println(<span class="string">"Run log:"</span>);</span><br><span class="line">           System.out.println(runLog.toString());</span><br><span class="line">           System.out.println(<span class="string">"Error log:"</span>);</span><br><span class="line">           System.out.println(errLog.toString());</span><br><span class="line">       } <span class="keyword">catch</span> (Exception e) {</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       } <span class="keyword">finally</span> {</span><br><span class="line">           <span class="keyword">try</span> {</span><br><span class="line">               <span class="keyword">if</span> (inputStreamReader != <span class="literal">null</span>) {</span><br><span class="line">                   inputStreamReader.close();</span><br><span class="line">               }</span><br><span class="line">               <span class="keyword">if</span> (errInputStreamReader != <span class="literal">null</span>) {</span><br><span class="line">                   errInputStreamReader.close();</span><br><span class="line">               }</span><br><span class="line"></span><br><span class="line">               <span class="keyword">if</span> (channelExec != <span class="literal">null</span>) {</span><br><span class="line">                   channelExec.disconnect();</span><br><span class="line">               }</span><br><span class="line">               <span class="keyword">if</span> (session != <span class="literal">null</span>) {</span><br><span class="line">                   session.disconnect();</span><br><span class="line">               }</span><br><span class="line">           } <span class="keyword">catch</span> (IOException e) {</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           }</span><br><span class="line">       }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   }</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></h2>
+<h2 id="遇到的問題">遇到的問題</h2>
+<ul>
+<li>記得要處理key的訪問權限，要不然連線時會報錯。</li>
+</ul>
+<hr>
+<h2 id="參考">參考</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.jcraft.com/jsch/">Jsch Official Web</a></li>
+<li>https://segmentfault.com/a/1190000019967309?utm_source=tag-newest</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-01-21</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Jsch/" title="Jsch">Jsch </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2022/01/21/Jsch實踐/,Roy's Blog,Jsch實踐,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2022/02/14/Paper-A-Comprehensive-Survey-on-Graph-Neural-Networks/" title="Paper: A Comprehensive Survey on Graph Neural Networks">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2022/01/21/LIBSVM%E6%96%BCPython%E4%B8%8B%E4%B9%8B%E5%AF%A6%E8%B8%90/" title="LIBSVM於Python下之實踐">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

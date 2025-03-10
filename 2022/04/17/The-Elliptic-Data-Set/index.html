@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>The Elliptic Data Set · Roy's Blog</title><meta name="description" content="前言
+Title： Introduction to Elliptic Data Set - a graph network of
+Bitcoin transactions with handcrafted features.
+Keywords: Anomaly Detection, Bitco"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>The Elliptic Data Set</a></h3></div><div class="post-content"><hr />
+<h2 id="前言">前言</h2>
+<p>Title： Introduction to Elliptic Data Set - a graph network of
+Bitcoin transactions with handcrafted features.</p>
+<p>Keywords: Anomaly Detection, Bitcoin, Anti-Money Laundering</p>
+<hr />
+<h2
+id="合法licit與不合法illicit定義">合法(licit)與不合法(illicit)定義</h2>
+<p>Licit: exchanges, wallet providers, miners, licit services, etc.</p>
+<blockquote>
+<p>wallet provider: any natural or legal person or other legal form that
+provides private cryptographic key protection services on behalf of its
+clients for the possession, storage, and transfer of virtual
+currencies.</p>
+</blockquote>
+<p>illicit: scams(欺詐), malware(惡意軟體), terrorist organizations,
+ransomware(勒索), Ponzi schemes(龐氏騙局), etc.</p>
+<hr />
+<h2 id="graph-construction">Graph Construction</h2>
+<h3 id="nodes">Nodes</h3>
+<p><strong>Nodes represent transactions.</strong> There are 203,769 node
+transactions. 4545 nodes labelled illicit &amp; 42019 labelled licit
+&amp; 157205 unknown.</p>
+<p>應用模型分類：<strong>Semi-supervised</strong></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/__results___13_1.png" /></p>
+<h3 id="node-feature">Node Feature</h3>
+<p><strong>Due to intellectual property issues, we cannot provide an
+exact description of all the features in the dataset.</strong></p>
+<p>Each node has associated <strong>166</strong> features. The
+<strong>first 94</strong> features represent local information about the
+transaction. The <strong>remaining 72</strong> features, called
+aggregated features, are obtained by aggregating transaction information
+one-hop backward/forward from the center node.</p>
+<ul>
+<li>94 Local feature:</li>
+</ul>
+<p>Time step: detail in Temporal Information</p>
+<p>Number of inputs/outputs:</p>
+<blockquote>
+<p>Inputs:The bitcoin address that contains the bitcoin Alice wants to
+send. To be more accurate, it is the address from which Alice had
+previously received bitcoin to and is now wanting to spend. Outputs:
+Bob’s public key or bitcoin address.</p>
+</blockquote>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20220414165447.png" /></p>
+<p>Transaction fee(手续费): Mathematically, transaction fees are the
+difference between the amount of bitcoin sent and the amount received.
+Conceptually, transaction fees are a reflection of the speed with which
+a user wants their transaction validated on the blockchain.</p>
+<p>Output volume and aggregated figures(總數) such as average BTC
+received (spent) by the inputs/outputs and average number of incoming
+(outgoing) transactions associated with the inputs/outputs.</p>
+<ul>
+<li>72 Aggregated feature:</li>
+</ul>
+<p>Obtained by aggregating transaction information one-hop
+backward/forward from the center node -the maximum, minimum, standard
+deviation and correlation coefficients(相關係數) of the neighbour
+transactions for the same information data (number of inputs/outputs,
+transaction fee, etc.).</p>
+<ul>
+<li>Temporal Information</li>
+</ul>
+<p>A time step from 1 to 49 is associated with each node. It represents
+an estimate of when the Bitcoin network confirmed the transaction. The
+time steps are evenly spaced with an interval of about two weeks and
+each one contains a single connected component of transactions that
+appeared on the blockchain within less than three hours between each
+other. Therefore, it can be considered that this data set includes 49
+directed acyclic graphs(有向無環圖) associated with different sequential
+moments in time.</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20220414153111.png" /></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20220414163019.png" /></p>
+<h3 id="edges">Edges</h3>
+<p><strong>Edges represent the flow of Bitcoin currency (BTC)</strong>
+going from one transaction to the next one. There are 234,355
+<strong>directed</strong> edge payments flows.</p>
+<hr />
+<h2 id="actual-data-document-format">Actual Data Document Format</h2>
+<p>The data set contains 3 .csv files:</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20220414160433.png" /></p>
+<ul>
+<li>elliptic_txs_classes</li>
+</ul>
+<p>About label info. 1 for illicit. 2 for illicit.</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20220414161151.png" /></p>
+<ul>
+<li>elliptic_txs_edgelist</li>
+</ul>
+<p>About node connection info.</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20220414162131.png" /></p>
+<ul>
+<li>elliptic_txs_features</li>
+</ul>
+<p>About Node(transaction) feartures info.（被加密處理過）</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20220414162402.png" /></p>
+<hr />
+<h2 id="參考">參考</h2>
+<ul>
+<li><p><a
+target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/ellipticco/elliptic-data-set">Elliptic
+Data Set</a></p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://medium.com/elliptic/the-elliptic-data-set-opening-up-machine-learning-on-the-blockchain-e0a343d99a14">The
+Elliptic Data Set: opening up machine learning on the
+blockchain</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1908.02591">M. Weber, G.
+Domeniconi, J. Chen, D. K. I. Weidele, C. Bellei, T. Robinson, C. E.
+Leiserson, "Anti-Money Laundering in Bitcoin: Experimenting with Graph
+Convolutional Networks for Financial Forensics", KDD ’19 Workshop on
+Anomaly Detection in Finance, August 2019, Anchorage, AK,
+USA.</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2102.05373">Catarina Oliveira,
+João Torres, Maria Inês Silva, David Aparício, João Tiago Ascensão, and
+Pedro Bizarro. 2021. GuiltyWalker: Distance to illicit nodes in the
+Bitcoin network. In Workshop on Machine Learning in Finance (KDD ’21),
+August, 2021, Singapore. ACM, New York, NY, USA, 5 pages.</a></p></li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-04-17</span><i class="fa fa-tag"></i><a class="tag" href="/tags/CryptoAD/" title="CryptoAD">CryptoAD </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2022/04/17/The-Elliptic-Data-Set/,Roy's Blog,The Elliptic Data Set,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2022/04/17/Paper-Convolutional-Neural-Networks-on-Graphs-with-Fast-Localized-Spectral/" title="Paper: Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering(ChebyNet)">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2022/03/02/Learning-Fast-Localized-Spectral-Filters-for-Graph/" title="Learning Fast Localized Spectral Filters for Graph">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

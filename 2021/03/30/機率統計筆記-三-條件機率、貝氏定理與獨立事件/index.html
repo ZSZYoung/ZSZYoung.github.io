@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>機率統計筆記:(三)條件機率，貝氏定理，相互獨立事件 · Roy's Blog</title><meta name="description" content="Conditional
+Probability(條件機率)
+Def：
+
+In probability theory, conditional probability is a measure of the
+probability of an event occurring, given t"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>機率統計筆記:(三)條件機率，貝氏定理，相互獨立事件</a></h3></div><div class="post-content"><h2 id="conditional-probability條件機率">Conditional
+Probability(條件機率)</h2>
+<p>Def：</p>
+<blockquote>
+<p>In probability theory, conditional probability is a measure of the
+probability of an event occurring, given that another event has already
+occurred.</p>
+<p>條件機率指的是某事件已經發生的條件下，另一事件發生的機率。</p>
+</blockquote>
+<p>B條件下A發生的機率記為：P(A|B)</p>
+<p><strong>有下式成立：</strong></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210330164844.png" /></p>
+<p><strong>亦有下式成立：</strong></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210330173424.png" /></p>
+<p>在機率運算中可推得： <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210330173456.png" /></p>
+<p>該式說明在計算某事件機率時，可以由該事件的某條件事件及其餘事件得到。</p>
+<p><strong>貝氏法則：</strong></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210330173121.png" /></p>
+<p>可簡單由上式推導得到。</p>
+<p>貝氏法則可以得到條件與事後事件互換事件的機率。</p>
+<hr />
+<h2 id="互相獨立事件">互相獨立事件</h2>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210330212122.png" /></p>
+<p><strong>注意：互相獨立事件和互斥事件是兩個不同的概念。如擲一枚硬幣，結果正反互斥，而與再擲一枚這一事件互相獨立。</strong></p>
+<p>互相獨立事件結合貝氏法則我們可以得到：</p>
+<p>P(B|A) = P(B)</p>
+<p>因為事件A與B互相獨立，所以A這一條件并不影響之後的B的機率，所以該等式成立。</p>
+<h4
+id="互相獨立事件與對方的餘事件亦互相獨立">互相獨立事件與對方的餘事件亦互相獨立</h4>
+<blockquote>
+<p>If A and B are independent, then A and B^c(complement event of B) are
+independent.</p>
+<p>若事件Ａ與Ｂ互相獨立，則Ａ與Ｂ的餘事件也互相獨立。</p>
+</blockquote>
+<h4 id="三個事件互相獨立的條件">三個事件互相獨立的條件</h4>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210330214847.png" /></p>
+<h4
+id="條件獨立條件機率與互相獨立事件的結合">條件獨立（條件機率與互相獨立事件的結合）</h4>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210330233053.png" /></p>
+<hr />
+<h2 id="有點意思的題目">有點意思的題目</h2>
+<h4 id="卡片顔色問題">卡片顔色問題</h4>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210330211038.png" /></p>
+<p>這題目直接用貝氏定理展開計算并不難，但有意思的在於倘若你直接讀題思考，容易陷入：朝上一面是紅色，可能性只剩下紅紅和紅黑兩張牌，所以答案為1/2的誤區。而實際上朝上的一面為紅色有三種可能，因為紅色牌的兩面都可能朝上，所以答案為1/3。</p>
+<h4 id="費馬">費馬</h4>
+<blockquote>
+<p>進行一串獨立試行，其成功的機率為p，失敗的機率為1 −
+p。求在m次失敗前出現n次成功的機率。</p>
+</blockquote>
+<p>解：</p>
+<blockquote>
+<p>Fermat的論點是：m 次失敗前出現n次成功的充要條件是在首m+n−1
+次試行中至少有n次成功 。</p>
+</blockquote>
+<p>所以答案為：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210330225051.png" /></p>
+<h2 id="參考資料">參考資料</h2>
+<ul>
+<li>Wikipedia</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-03-30</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Probability-Statistics/" title="Probability&amp;Statistics">Probability&amp;Statistics </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/03/30/機率統計筆記-三-條件機率、貝氏定理與獨立事件/,Roy's Blog,機率統計筆記:(三)條件機率，貝氏定理，相互獨立事件,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/04/01/LA%E7%AD%86%E8%A8%98-%E4%B8%83-Determinants%20by%20Cofacotr%20Expansion/" title="LA筆記:(七)Determinants by Cofacotr Expansion">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/03/28/LA%E7%AD%86%E8%A8%98-%E5%85%AD-Diagonal-Triangular-and-Symmetric-matrices/" title="LA筆記:(六)Diagonal,Triangular and Symmetric matrices">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

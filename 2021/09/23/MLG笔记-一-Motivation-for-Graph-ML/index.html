@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>MLG笔记:(一) Motivation for Graph ML · Roy's Blog</title><meta name="description" content="Why Graph?
+Graph體現了entities(nodes)之間的聯繫，這些聯繫構成一個network。許多的數據都可以自然的用graph來建模表示，例如計算機網路、疾病傳染路徑、社交網路等。即graph有廣泛的應用空間。
+
+課程討論的主要問題：
+
+How do we take a"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>MLG笔记:(一) Motivation for Graph ML</a></h3></div><div class="post-content"><h2 id="why-graph">Why Graph?</h2>
+<p>Graph體現了entities(nodes)之間的聯繫，這些聯繫構成一個network。許多的數據都可以自然的用graph來建模表示，例如計算機網路、疾病傳染路徑、社交網路等。即graph有廣泛的應用空間。</p>
+<hr>
+<h2 id="課程討論的主要問題">課程討論的主要問題：</h2>
+<blockquote>
+<p>How do we take advantage of relational structure for better
+prediction? 如何利用graph來做更好的預測？</p>
+<p>How can we develop neural networks that are much more broadly
+applicable? 如何將神經網路和graph結合以處理複雜的數據結構？</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210920170135.png"></p>
+<hr>
+<h2 id="modern-ml-toolbox">Modern ML Toolbox</h2>
+<p>現有的ML工具大多針對簡單的輸入數據結構，如文本語音這種sequence型數據，如圖像這種grid型數據。</p>
+<h2 id="graph-representation-learning">Graph representation
+learning</h2>
+<blockquote>
+<p>Representation learning is to map nodes of a graph to a d-dimensional
+embedding, to d-dimensional vector.</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210920170640.png"></p>
+<p>Various topics in ML and Representation learning for graph:</p>
+<ul>
+<li>Traditional methods: Graphlets, Graph Kernels</li>
+<li>Methods for node embeddings: Deepwalk, Node2Vec</li>
+<li>Graph Neural Network: GCN, GraphSAGE,GAT,Theory of GNNs</li>
+<li>Knowledge graphs and reasoning: TransE, BetaE</li>
+<li>Applications to Biomedicine Science Industry</li>
+</ul>
+<h2 id="參考">參考</h2>
+<ul>
+<li>StandFord CS224W http://web.stanford.edu/class/cs224w/</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-09-23</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning </a><a class="tag" href="/tags/GraphML/" title="GraphML">GraphML </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/09/23/MLG笔记-一-Motivation-for-Graph-ML/,Roy's Blog,MLG笔记:(一) Motivation for Graph ML,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/09/23/MLG%E7%AC%94%E8%AE%B0-%E4%BA%8C-Applications-of-Graph-ML/" title="MLG笔记:(二) Applications of Graph ML">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/09/23/%E8%AB%96%E6%96%87-Machine-Learning-on-Graphs-A-Model-and-Comprehensive-Taxonomy/" title="論文:Machine Learning on Graphs: A Model and Comprehensive Taxonomy">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>LA筆記:(一)矩陣基礎及其運算 · Roy's Blog</title><meta name="description" content="前言
+因為交換和疫情的緣故，導致我大四下才有機會修線性代數最後一學期沒法混了。現在還沒開始上課，於此先把矩陣運算總結下。
+矩陣定義
+
+A matrix is a rectangular array of numbers (or other mathematical
+objects) for"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>LA筆記:(一)矩陣基礎及其運算</a></h3></div><div class="post-content"><h2 id="前言">前言</h2>
+<p>因為交換和疫情的緣故，導致我大四下才有機會修線性代數<del>最後一學期沒法混了</del>。現在還沒開始上課，於此先把矩陣運算總結下。</p>
+<h2 id="矩陣定義">矩陣定義</h2>
+<blockquote>
+<p>A matrix is a rectangular array of numbers (or other mathematical
+objects) for which operations such as addition and multiplication are
+defined. --Wikipedia</p>
+</blockquote>
+<p>矩陣是長方形的數學式(數字或表達式)陣列，其定義了一些諸如加或乘的操作。</p>
+<h2 id="矩陣細部概念">矩陣細部概念</h2>
+<blockquote>
+<p>The numbers, symbols, or expressions in the matrix are called its
+entries or its elements.</p>
+</blockquote>
+<p>矩陣內的數字或表達式叫做矩陣的entry/element</p>
+<blockquote>
+<p>The horizontal and vertical lines of entries in a matrix are called
+rows and columns, respectively.</p>
+</blockquote>
+<p>豎者叫column，橫者叫row</p>
+<blockquote>
+<p>A matrix with m rows and n columns is called an m × n matrix, or
+m-by-n matrix, while m and n are called its dimensions.</p>
+</blockquote>
+<p>m個row，n個column的矩陣叫做m×n的矩陣，或者叫做m-by-n的矩陣，其中m與n是矩陣的維度。</p>
+<blockquote>
+<p>Matrices with a single row are called row vectors, and those with a
+single column are called column vectors.</p>
+</blockquote>
+<p>只有一個row的矩陣叫row vector。只有一個column的矩陣叫column
+vector。</p>
+<blockquote>
+<p>A matrix with the same number of rows and columns is called a square
+matrix. N of rows = N of clomuns的矩陣叫做square matrix(方陣)</p>
+</blockquote>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210221233419.png" /></p>
+<blockquote>
+<p>row數和column數都相同的兩個矩陣稱為同型矩陣 ## 矩陣表示方法</p>
+</blockquote>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210222222841.png" /></p>
+<p>可以用方括號或者圓括號把elements圈起來表示矩陣，或者使用代數式表達(其中R
+for real number)。</p>
+<h2 id="矩陣基本運算">矩陣基本運算</h2>
+<ul>
+<li><p>矩陣加法運算</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210222223241.png" /></p></li>
+</ul>
+<p>僅適用於同型矩陣，將同型矩陣對應element做加法得到的新矩陣即為矩陣加法運算結果。</p>
+<ul>
+<li><p>矩陣減法運算
+僅適用於同型矩陣，與矩陣加法運算類似，僅計算element時改為對應差作為結果矩陣之element。</p></li>
+<li><p>矩陣數乘運算</p></li>
+</ul>
+<blockquote>
+<p>The product cA of a number c (also called a scalar(純量) in the
+parlance of abstract algebra) and a matrix A is computed by multiplying
+every entry of A by c :(cA)i,j = c · Ai,j.This operation is called
+scalar multiplication</p>
+</blockquote>
+<p>矩陣數乘運算將矩陣中每一個element乘以常數，得到的矩陣即為數乘運算結果矩陣。
+<img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210223195122.png" /></p>
+<p>如下例: <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210223195039.png" /></p>
+<p><strong>矩陣數乘運算滿足結合律和分配律</strong></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210223195241.png" /></p>
+<hr />
+<ul>
+<li>矩陣乘法運算</li>
+</ul>
+<blockquote>
+<p>Multiplication of two matrices is defined if and only if the number
+of columns of the left matrix is the same as the number of rows of the
+right matrix.</p>
+</blockquote>
+<p>兩個矩陣的乘法運算僅適用於左側矩陣的column數等於右側矩陣的row數時。</p>
+<blockquote>
+<p>If A is an m-by-n matrix and B is an n-by-p matrix, then their matrix
+product AB is the m-by-p</p>
+</blockquote>
+<p>乘法運算得到的新矩陣其row數等於左側矩陣row數，其column數等於右側矩陣column數。</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210222224415.png" /></p>
+<p>每一乘法結果矩陣element值滿足上圖公式。</p>
+<p><strong>矩陣乘法不一定滿足交換律，滿足結合律和分配率，</strong> <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210223195513.png" /></p>
+<p><strong>矩陣乘法一般不可兩端消去：</strong> <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210223200136.png" /></p>
+<p>例如：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210222225636.png" /></p>
+<p>lemma:</p>
+<blockquote>
+<p>If A is an mXn matrix and B is an nXr matrix, then</p>
+<p>&lt;A&gt; jth column vector of (A·B) = A · [jth column vector of
+B]</p>
+<p>&lt;B&gt; ith row vector of (A·B) = [ith row vector of A] · B</p>
+</blockquote>
+<p>proof of &lt;A&gt;:</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210325200432.jpg" /></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210325195124.jpg" /></p>
+<p>證明思路：回歸矩陣乘法的定義，將(A·B)的jth
+column拆成累加式，後提出累加式中B的jth column得證。</p>
+<hr />
+<ul>
+<li>矩陣冪運算</li>
+</ul>
+<p>矩陣冪運算僅適用於方陣，連乘冪次即可。（因為矩陣乘法僅適用於左陣column等於右陣row時，又冪運算需自身連乘，所以只有方陣滿足）</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210223201652.png" /></p>
+<p>且矩陣的0次冪結果為該矩陣的單位矩陣（對角線為1且其餘皆為0，與原矩陣等大的矩陣）
+&gt; identity matrix: In linear algebra, the identity matrix (sometimes
+ambiguously called a unit matrix) of size n is the n × n square matrix
+with ones on the main diagonal and zeros elsewhere.</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210223201630.png" /></p>
+<p>滿足：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210223202605.png" /></p>
+<p><strong>注意不一定滿足:</strong> <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210308210706.png" /></p>
+<p>因為展開後對比左右要注意到矩陣乘法不一定滿足交換律，即:</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210308211332.png" /></p>
+<hr />
+<ul>
+<li>矩陣轉置操作</li>
+</ul>
+<blockquote>
+<p>The transpose of an m-by-n matrix A is the n-by-m matrix AT (also
+denoted Atr or tA) formed by turning rows into columns and vice
+versa:(AT)i,j = Aj,i.</p>
+</blockquote>
+<p>矩陣轉置即將矩陣的row與column互換</p>
+<p>如下例：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210223204412.png" /></p>
+<p>滿足：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210223204455.png" /></p>
+<p><strong>Proof：</strong></p>
+<p>式一：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210325201307.png" /></p>
+<p>式四： <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210325201343.png" /></p>
+<p>式二： <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210325201136.jpg" /></p>
+<p>把握住關鍵代換(matrix)^T ij = (matrix)ji</p>
+<hr />
+<h2 id="方陣之tr">方陣之tr</h2>
+<blockquote>
+<p>if A is a <em>square matrix</em>, then the <em>trace</em> of A,
+denoted tr(A) is defined to be the sum of the entries in the main
+diagonal(主軸) of A.</p>
+<p>i.e. tr(A) = sum of akk (1&lt;=k&lt;=n) ## 後記
+因為臨近考試在複習，所以為了節省時間一些證明直接對筆記拍照上傳，可能會比較潦草，之後有空會用LaTeX做的漂亮些。</p>
+</blockquote>
+<h2 id="參考">參考</h2>
+<ul>
+<li><p>https://en.wikipedia.org/wiki/Matrix_(mathematics)</p></li>
+<li><p>https://blog.csdn.net/linxilinxilinxi/article/details/91529083?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control&amp;dist_request_id=fcba8008-005d-4d69-b8b0-023c9bc78b3b&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.control</p></li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-02-21</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Linear-Algebra/" title="Linear Algebra">Linear Algebra </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/02/21/LA筆記-一-矩陣基礎及其運算/,Roy's Blog,LA筆記:(一)矩陣基礎及其運算,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/02/22/OS%E7%AD%86%E8%A8%98-%E4%B8%80-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E6%A6%82%E8%A7%80/" title="OS筆記:(一)作業系統概觀">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/02/15/Linux%E4%B8%8BFile-descriptor%E7%90%86%E8%A7%A3/" title="Linux下File descriptor理解">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

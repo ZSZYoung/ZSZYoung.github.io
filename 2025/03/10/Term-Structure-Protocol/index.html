@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>Term Structure Protocol · Roy's Blog</title><meta name="description" content="Intro.
+
+Term Structure is a full-fledged peer-to-peer bond protocol powered
+by ZK-rollup.
+On Term Structure, people can borrow and lend digital as"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Term Structure Protocol</a></h3></div><div class="post-content"><h2 id="intro.">Intro.</h2>
+<blockquote>
+<p>Term Structure is a full-fledged peer-to-peer bond protocol powered
+by ZK-rollup.</p>
+<p>On Term Structure, people can borrow and lend digital assets to each
+other for a pre-determined duration and a <strong>fixed interest
+rate</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="markets">Markets</h2>
+<h3 id="primary-markets-core-market">Primary Markets (Core Market)</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/B-s--1.gif" /></p>
+<p>Image retrieved from <a
+target="_blank" rel="noopener" href="https://blog.ts.finance/introducing-term-structure-a-full-fledged-peer-to-peer-bond-protocol-powered-by-zk-rollup/">Link</a></p>
+<p>hourly batch auction market. Borrowers and lenders match their
+desired amount and interest rates through a <strong>batch auction
+mechanism.</strong></p>
+<p>Lender:</p>
+<ul>
+<li><p>Collateralize the base token (ETH, wBTC, USDT, USDC, and DAI) or
+other supported collateral(wstETH and sDAI)</p></li>
+<li><p>decide how much interest they are willing to receive</p></li>
+<li><p>Got bond tokens(The TSB above, ERC20 based) &amp; fixed
+interest</p></li>
+</ul>
+<p>Borrower:</p>
+<ul>
+<li><p>decide how much interest they are willing to pay</p></li>
+<li><p>Get the loan</p></li>
+</ul>
+<p>Smart contract:</p>
+<ul>
+<li><p>Hold the collateral</p></li>
+<li><p>Generate the debt record</p></li>
+</ul>
+<h4 id="batched-auction-mechanism">Batched Auction Mechanism</h4>
+<blockquote>
+<p>In batch auctions, borrowers and lenders are eligible to place orders
+of any amount greater than the minimum bid amount and interest rate
+within the bidding window before the cut-off time for the coming
+auction.</p>
+<p>matching process: automatically sorting the interest rates and
+amounts that match the orders from borrowers and lenders</p>
+</blockquote>
+<p>More details at <a
+target="_blank" rel="noopener" href="https://docs.ts.finance/protocol-spec/primary-markets/auction-mechanism">Link</a></p>
+<p>Borrower info:</p>
+<ul>
+<li><p>Collateral token type</p></li>
+<li><p>Collateral amount</p></li>
+<li><p>Borrowed token type</p></li>
+<li><p>Borrowed amount</p></li>
+<li><p>Borrowed tenor (period)</p></li>
+<li><p>Highest acceptable interest rate for borrowing</p></li>
+</ul>
+<p>Lenders info:</p>
+<ul>
+<li><p>lending token type</p></li>
+<li><p>Amount</p></li>
+<li><p>Tenor (period)</p></li>
+<li><p>lowest acceptable interest rate level</p></li>
+</ul>
+<p>Matching process:</p>
+<ul>
+<li><p>lenders are sorted by the level of interest rates in their
+orders.</p></li>
+<li><p>borrowers are sorted by the time when they place their
+orders.</p></li>
+<li><p>The matching process is sequential and follows the sorted orders
+from borrowers. Each borrower's order is matched with all eligible
+lender orders to find the unified lending rate when the entire amount of
+the borrow order is fulfilled or there are no more eligible lend orders.
+The highest interest rate level in any matching will be the unified
+lending rate for both borrowers and lenders in that round of matching,
+and all lenders in this round will receive the same interest
+rate.</p></li>
+</ul>
+<p>LTV: * 75% for wBTC or ETH * 90% for stablecoins (USDT, USDC, and
+DAI) <a
+target="_blank" rel="noopener" href="https://docs.ts.finance/protocol-spec/primary-markets/borrow#stablecoin-pairs-loan">further
+info</a></p>
+<hr />
+<h3 id="secondary-markets">Secondary Markets</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/C-s-.gif" /></p>
+<p>Image retrieved from <a
+target="_blank" rel="noopener" href="https://blog.ts.finance/introducing-term-structure-a-full-fledged-peer-to-peer-bond-protocol-powered-by-zk-rollup/">Link</a></p>
+<p>Buy &amp; Sell bonds. Orderbook exchange mechanism.</p>
+<p>Buyer &amp; seller:</p>
+<ul>
+<li>buy/sell TSB (term structure bond token)</li>
+</ul>
+<p>Retail user:</p>
+<ul>
+<li>get fixed-income instruments</li>
+</ul>
+<p>Primary dealer:</p>
+<ul>
+<li>Providing significant liquidity &amp; facilitate trades in the two
+markets</li>
+</ul>
+<hr />
+<h3 id="repo-market">Repo Market</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/D.gif" />
+Image retrieved from <a
+target="_blank" rel="noopener" href="https://blog.ts.finance/introducing-term-structure-a-full-fledged-peer-to-peer-bond-protocol-powered-by-zk-rollup/">Link</a></p>
+<p>Using TSB as collateral, short-term borrowing for funding and
+leverage purposes</p>
+<p>Borrower (TSB holder):</p>
+<ul>
+<li>collateralize TSB for loans</li>
+</ul>
+<hr />
+<h2 id="reference">Reference</h2>
+<ol type="1">
+<li><a target="_blank" rel="noopener" href="https://docs.ts.finance/protocol-spec/overview">AAVE
+Docs</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.ts.finance/introducing-term-structure-a-full-fledged-peer-to-peer-bond-protocol-powered-by-zk-rollup/">Introducing
+Term Structure 📖 - a Full-fledged Peer-to-Peer Bond Protocol Powered by
+ZK-Rollup</a></li>
+</ol>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2025-03-10</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Blockchain/" title="Blockchain">Blockchain </a><a class="tag" href="/tags/Term-Structure/" title="Term Structure">Term Structure </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2025/03/10/Term-Structure-Protocol/,Roy's Blog,Term Structure Protocol,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/2025/03/08/Paper-Anti-Money-Laundering-in-Bitcoin-Experimenting-with-GCN-Networks-for-Financial-Forensics/" title="Paper: Anti-Money Laundering in Bitcoin: Experimenting with GCN Networks for Financial Forensics">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

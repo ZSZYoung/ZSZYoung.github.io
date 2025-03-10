@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>OS筆記:(一)作業系統概觀 · Roy's Blog</title><meta name="description" content="前言
+距離在中大修完OS已經過去兩年了，作為一個內容繁多且碎片化知識極多的領域，我發現自己已經忘了很多了那個時候用的快樂學習法。趁著這個學期再去旁聽一次呂老師的OS課程做複習之用，也將課程內容整理到博客上以深刻印象。本文是第一次上課的總結。
+OS定義
+
+An operating system"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>OS筆記:(一)作業系統概觀</a></h3></div><div class="post-content"><h2 id="前言">前言</h2>
+<p>距離在中大修完OS已經過去兩年了，作為一個內容繁多且碎片化知識極多的領域，我發現自己已經忘了很多了<del>那個時候用的快樂學習法</del>。趁著這個學期再去旁聽一次呂老師的OS課程做複習之用，也將課程內容整理到博客上以深刻印象。本文是第一次上課的總結。</p>
+<h2 id="os定義">OS定義</h2>
+<blockquote>
+<p>An operating system (OS) is system software that manages computer
+hardware, software resources, and provides common services for computer
+programs.</p>
+</blockquote>
+<p>粗淺的來說，OS就是計算機軟硬體資源的分配者、提供服務的支持者，應用程式與硬體之間的中間人。</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/20210222213239.png" /></p>
+<p>在上圖中也可以清楚的看到OS位於應用程式與硬體之間，應用程式與硬體之間的交互都要經過OS才能達成，不可直接互相交互。</p>
+<h2 id="os分類">OS分類</h2>
+<ul>
+<li>Batch OS （批處理作業系統）
+將有相同工作或相同需求的任務合成一個批次進行處理的OS，這是一種非常陳舊的作業系統種類。</li>
+</ul>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/BatchOS.jpeg" /></p>
+<p>Linux下用&amp;進行背景進程工作時，進程處理的方式即為batch.</p>
+<ul>
+<li>Time sharing OS （分時作業系統）</li>
+</ul>
+<p>每一個任務都會獲得一定的CPU
+time去執行，在這個時間結束後切換到另一個任務，往直至結束所有任務。</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/Capture2210.png" /></p>
+<p><strong>每個任務獲得的執行時間段稱為quantum 或 slice
+或slot。</strong></p>
+<ul>
+<li><p>Real time OS</p>
+<p>這種OS應用於非常嚴謹的領域，當一個任務需要執行時，OS會立即執行該任務並在極短時間內完成回應。例如用在飛彈發射等領域。</p></li>
+</ul>
+<h2 id="os-功能">OS 功能</h2>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images011819_0753_OperatingSy5.png" /></p>
+<ul>
+<li><p>Process management:- Process management helps OS to create and
+delete processes. It also provides mechanisms for synchronization and
+communication among processes.</p></li>
+<li><p>Memory management:- Memory management module performs the task of
+allocation and de-allocation of memory space to programs in need of this
+resources.</p></li>
+<li><p>File management:- It manages all the file-related activities such
+as organization storage, retrieval, naming, sharing, and protection of
+files.</p></li>
+<li><p>Device Management: Device management keeps tracks of all devices.
+This module also responsible for this task is known as the I/O
+controller. It also performs the task of allocation and de-allocation of
+the devices.</p></li>
+<li><p>I/O System Management: One of the main objects of any OS is to
+hide the peculiarities of that hardware devices from the user.</p></li>
+<li><p>Secondary-Storage Management: Systems have several levels of
+storage which includes primary storage, secondary storage, and cache
+storage. Instructions and data must be stored in primary storage or
+cache so that a running program can reference it.</p></li>
+<li><p>Security:- Security module protects the data and information of a
+computer system against malware threat and authorized access.</p></li>
+<li><p>Command interpretation: This module is interpreting commands
+given by the and acting system resources to process that
+commands.</p></li>
+<li><p>Networking: A distributed system is a group of processors which
+do not share memory, hardware devices, or a clock. The processors
+communicate with one another through the network.</p></li>
+<li><p>Job accounting: Keeping track of time &amp; resource used by
+various job and users.</p></li>
+<li><p>Communication management: Coordination and assignment of
+compilers, interpreters, and another software resource of the various
+users of the computer systems.</p></li>
+</ul>
+<h2 id="os相關的一些概念">OS相關的一些概念</h2>
+<blockquote>
+<p>Process:a process is the instance of a computer program that is being
+executed by one or many threads.</p>
+</blockquote>
+<p>進程是正在被執行的程式</p>
+<blockquote>
+<p>system call: a system call (commonly abbreviated to syscall) is the
+programmatic way in which a computer program requests a service from the
+kernel of the operating system on which it is executed.</p>
+</blockquote>
+<p>系統調用是請求OS為程式做一些服務的方式。</p>
+<blockquote>
+<p>DMA:Direct memory access (DMA) is a feature of computer systems that
+allows certain hardware subsystems to access main system memory
+(random-access memory) independent of the central processing unit
+(CPU).</p>
+</blockquote>
+<p>DMA指硬體可以直接訪問memory而不需要經過CPU之手。</p>
+<blockquote>
+<p>HDD:A hard disk drive (HDD), hard disk, hard drive, or fixed disk, is
+an electro-mechanical data storage device that stores and retrieves
+digital data using magnetic storage and one or more rigid rapidly
+rotating platters coated with magnetic material.</p>
+</blockquote>
+<p>HDD本意指磁盤驅動器，現在參與disk同意義。</p>
+<blockquote>
+<p>Interrupt is a signal emitted by hardware or software when a process
+or an event needs immediate attention.</p>
+</blockquote>
+<p>硬體或軟體需要CPU立即注意到某事時發出的信號叫做中斷。</p>
+<blockquote>
+<p>“时钟中断”是特别重要的一个中断，因为整个操作系统的活动都受到它的激励。系统利用时钟中断维持系统时间、促使环境的切换，以保证所有进程共享CPU；利用时钟中断进行记帐、监督系统工作以及确定未来的调度优先级等工作。可以说，“时钟中断”是整个操作系统的脉搏。</p>
+</blockquote>
+<h2 id="參考">參考</h2>
+<ul>
+<li>https://www.geeksforgeeks.org</li>
+<li>Wikipedia</li>
+<li>https://blog.csdn.net/farmwang/article/details/70173139</li>
+<li>https://www.guru99.com/operating-system-tutorial.html</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-02-22</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Opreating-System/" title="Opreating System">Opreating System </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/02/22/OS筆記-一-作業系統概觀/,Roy's Blog,OS筆記:(一)作業系統概觀,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/02/24/%E5%8F%A4%E6%96%87%E5%AD%97%E5%B0%8E%E8%AE%80%E7%AD%86%E8%A8%98-%E4%B8%80-%E6%BC%A2%E5%AD%97%E6%BA%90%E6%B5%81%E8%88%87%E7%94%B2%E9%AA%A8%E6%96%87/" title="古文字導讀筆記:(一)漢字源流與甲骨文">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/02/21/LA%E7%AD%86%E8%A8%98-%E4%B8%80-%E7%9F%A9%E9%99%A3%E5%9F%BA%E7%A4%8E%E5%8F%8A%E5%85%B6%E9%81%8B%E7%AE%97/" title="LA筆記:(一)矩陣基礎及其運算">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

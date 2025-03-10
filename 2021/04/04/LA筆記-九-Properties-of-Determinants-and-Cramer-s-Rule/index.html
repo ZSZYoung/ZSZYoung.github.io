@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>LA筆記:(九)Properties of Determinants and Cramers Rule · Roy's Blog</title><meta name="description" content="行列式的一些性質
+
+
+If A is an n-by-n matrix, then det(k·A) = k^n · det(A)
+因為k對A的影響體現在每次降階中，一共n次降階帶來n個k相乘的影響。
+det(A+B) ≠ det(A) + det(B)
+但在特殊情況下會成立：矩陣AB僅"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>LA筆記:(九)Properties of Determinants and Cramers Rule</a></h3></div><div class="post-content"><h2 id="行列式的一些性質">行列式的一些性質</h2>
+<blockquote>
+<ul>
+<li><p>If A is an n-by-n matrix, then det(k·A) = k^n · det(A)
+因為k對A的影響體現在每次降階中，一共n次降階帶來n個k相乘的影響。</p></li>
+<li><p>det(A+B) ≠ det(A) + det(B)
+但在特殊情況下會成立：矩陣AB僅僅在某一row或column上有差異，其他完全相同。這時det(A+B)和det(A)、det(B)都對這唯一不同row進行expansion，得到的行列式值滿足det(A+B)
+= det(A) + det(B)</p></li>
+<li><p>det(A·B) = det(A) · det(B), where A and B are square matrices of
+the same size.</p></li>
+</ul>
+<h2
+id="lemma經過基本矩陣操作的矩陣行列式為原矩陣行列式與基本矩陣行列式的乘積">lemma:經過基本矩陣操作的矩陣行列式為原矩陣行列式與基本矩陣行列式的乘積</h2>
+</blockquote>
+<blockquote>
+<p>If B is a square matrix and E is an elementary matrix of the same
+size, then det(EB) = det(E) · det(B)</p>
+</blockquote>
+<blockquote>
+<p>推廣之有：</p>
+<p>If B = Ek ·Ek-1 ... E2 · E1 · A ,then</p>
+<p>det(B) = det (Ek Ek-1 ... E2 E1 A)</p>
+<p>= det(Ek) det (Ek-1) ... det(E2) det(E1) det(A)</p>
+</blockquote>
+<p>注意之前提到過det(E)有三種可能：k、1、-1，分別對應三種ERO對行列式的影響。</p>
+<h2 id="重要theorem-當且僅當行列式不為0時方陣可逆">（重要）Theorem:
+當且僅當行列式不為0時，方陣可逆。</h2>
+<blockquote>
+<p>A square matrix A is invertible if and only if det(A) ≠ 0</p>
+</blockquote>
+<p><strong>proof:</strong></p>
+<ul>
+<li><p>正向證明（矩陣可逆則其行列式不為0） &gt;let R be the RREF of A,
+then by throrem, there exist elementary matrices E1,E2,...,Ek such that
+&gt; &gt;R = Ek Ek-1 ... E2 E1 A &gt; &gt;∵A is invertible &gt;<br />
+&gt;R = I = Ek Ek-1 ... E2 E1 A &gt;<br />
+&gt;det(I) = det(Ek Ek-1 ... E2 E1 A ) &gt; &gt;1 = det(Ek) det(Ek-1)
+... det(E2) det(E1) det(A) &gt; &gt;∴ det(A) ≠ 0</p>
+<p>證明思路：由可逆引入其RREF是單位矩陣，結合單位矩陣表示化簡為單位矩陣的過程，再從兩邊引入det，最後通過觀察式子得出結論得證。</p></li>
+<li><p>反向證明（矩陣行列式不為0則可逆）</p>
+<blockquote>
+<p>det(R) = det(Ek Ek-1 ... E2 E1 A ) = det(Ek) det(Ek-1) ... det(E2)
+det(E1) det(A)</p>
+<p>∵ det(A) ≠ 0 and det(E) ≠ 0</p>
+<p>∴ det(R) ≠ 0</p>
+<p>By theorem: the RREF of square matrix A is either has a row of zeros
+or R = I , if R has a row of zeros, then det(R) = 0.</p>
+<p>∴ R = I</p>
+<p>By theorem, A is invertible.</p>
+</blockquote>
+<p>證明思路：由原矩陣行列式不為0導出其RREF行列式亦不為0，說明其RREF不可能有全0row，則其RREF就是單位矩陣，則原矩陣可逆。</p></li>
+</ul>
+<h2
+id="重要-theorem等size方陣乘積方陣的行列式等於兩方陣行列式的乘積">(重要)
+Theorem:等size方陣乘積方陣的行列式等於兩方陣行列式的乘積</h2>
+<blockquote>
+<p>If A and B are square matrices of the same size, then det(AB) =
+det(A) det(B)</p>
+</blockquote>
+<p><strong>Proof:</strong></p>
+<blockquote>
+<p>If A is singular, then (AB) is singular(by theorem) and det(A) = 0,
+det(AB) = 0</p>
+<p>∴ det(AB) = 0 = 0 · det(B) = det(A) · det(B)</p>
+<p>If A is invertible, then by theorem,</p>
+<p>I = Ek Ek-1 ... E2 E1 A</p>
+<p>=&gt; A = E1^-1 E2^-1 ... Ek^-1</p>
+<p>∴ det(AB) = det((E1^-1 E2^-1 ... Ek^-1) · B )</p>
+<p>(by lemma) = det(E1^-1) det(E2^-1) det(Ek^-1) det(B)</p>
+<p>= det(E1^-1 E2^-1 ... Ek^-1) det(B)</p>
+<p>= det(A) det(B)</p>
+</blockquote>
+<p>證明思路：對矩陣是否可逆進行討論。在不可逆時結合可逆矩陣乘積特性湊出結果，在可逆時用之前的lemma整理出結果。</p>
+<h2 id="theorem-可逆矩陣與其逆矩陣兩者行列式關係">Theorem:
+可逆矩陣與其逆矩陣兩者行列式關係</h2>
+<blockquote>
+<p>If A is invertible, then det(A^-1) = 1/det(A)</p>
+<p>可逆矩陣之逆矩陣行列式為本身行列式之倒數</p>
+</blockquote>
+<p><strong>Proof：</strong></p>
+<blockquote>
+<p>∵ A · A^-1 = I</p>
+<p>∴ det(A · A^-1) = det(I) = 1</p>
+<p>=&gt; det(A) · det(A^-1) = 1</p>
+<p>=&gt; det(A^-1) = 1/det(A)</p>
+</blockquote>
+<p>證明思路：由可逆矩陣定義兩邊取det可簡單得到證明。</p>
+<h2 id="adjugate-matrix伴隨矩陣">Adjugate Matrix(伴隨矩陣)</h2>
+<p>Def：</p>
+<blockquote>
+<p>If A is an n-by-n matrix and cij is the cofactor of aij, then the
+matrix [c11 c12 ... c1n, c21 c22 ... c2n, ... , cn1 cn2... cnn] is
+called the matrix of cofactor from A. The transpose of this matrix is
+called the adjoint of A, is denoted by adj(A).</p>
+<p>由方陣A元素對應cofactor組成的方陣叫做A的cofactor矩陣，cofactor矩陣的轉置矩陣叫做adjugate
+matrix（伴隨矩陣）。 即：adj(A) = C^T = Cji = [c11 c21 ... cn1, c12 c22
+... cn2,..., c1n c2n ... cnn].</p>
+</blockquote>
+<h2 id="lemma">lemma:</h2>
+<blockquote>
+<p>let A be an n-by-n matrix, then</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/imagesMommyTalk1617861702919.jpg"
+alt="MommyTalk1617861702919" />
+<figcaption aria-hidden="true">MommyTalk1617861702919</figcaption>
+</figure>
+</blockquote>
+<h2
+id="theorem伴隨矩陣行列式逆矩陣的聯結關係式快速尋找伴隨矩陣的辦法">Theorem：伴隨矩陣、行列式、逆矩陣的聯結關係式（快速尋找伴隨矩陣的辦法）</h2>
+<blockquote>
+<p>let A be a square matrix, then A · adj(A) = det(A) · I</p>
+<p>furthermore, if A is invertible then adj(A) = det(A) · A^-1</p>
+</blockquote>
+<p>這個式子漂亮的把逆矩陣、矩陣行列式、伴隨矩陣關聯在一起，給出了尋找逆矩陣、伴隨矩陣的新方法。但這個方法尋找逆矩陣較慢，所以一般用逆矩陣帶入該式較快速尋找伴隨矩陣。</p>
+<p><strong>Proof:</strong></p>
+<blockquote>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210408141738.png"
+alt="20210408141738" />
+<figcaption aria-hidden="true">20210408141738</figcaption>
+</figure>
+<p>= det(A) · δij (by lemma)</p>
+<p>= det(A) · I</p>
+<p>furthermore, if A is invertible, then</p>
+<p>A · adj(A) = det(A) · In</p>
+<p>=&gt; A^-1 · A · adj(A) = A^-1 · det(A) · In</p>
+<p>=&gt; adj(A = det(A) · A^-1</p>
+</blockquote>
+<p>證明思路：先由伴隨矩陣的定義向cofactor矩陣進行一次轉換，再將上邊的lemma簡單帶入即可。</p>
+<h2 id="cramers-rule">Cramer's Rule</h2>
+<blockquote>
+<p>If AX = b is a system of n linear equations in n knowns such that
+det(A) ≠ 0, then the system has a unique solution.</p>
+<p>The solution is x1 = det(A1) / det(A), x2 = det(A2) / det(A), ..., xn
+= det(An) / det(A), where Aj is the matrix obtained by replacing the
+entries in the jth column of A by the entries in the matrix(column
+vector) b = [b1 , b2,..., bn].</p>
+</blockquote>
+<p>該求解方法在實際運算上不能帶來便利，但其形式卻比較漂亮。</p>
+<p><strong>Proof:</strong></p>
+<blockquote>
+<p>∵ det(A) ≠ 0 =&gt; A is invertible</p>
+<p>∴ AX = b =&gt; A^-1· A · X = A^-1 · b =&gt; I · X = A^-1 · b =&gt; X
+= A^-1 · b =&gt; x = (adj(A) / det(A)) ·b =</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210421112021.png"
+alt="20210421112021" />
+<figcaption aria-hidden="true">20210421112021</figcaption>
+</figure>
+<p>=&gt; xj = (b1c1j + b2c2j + ... + bncnj)/det(A) (1&lt;=j&lt;=n)
+......(1)</p>
+<p>and:</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210421112907.png"
+alt="20210421112907" />
+<figcaption aria-hidden="true">20210421112907</figcaption>
+</figure>
+<p>=b1c1j + b2c2j +...+ bncnj ......(2)</p>
+<p>Substitute (2) into (1) we have:</p>
+<p>xj = det(Aj)/det(A)</p>
+</blockquote>
+<p>證明思路：用可逆的特性導出解的形式為：x = A^-1 ·
+b,再根據上一個theorem將伴隨矩陣引入，接着根據伴隨矩陣的定義對應獲得xj的表達式。另一方面將第j個column用vector
+b替代後對該column進行cofactor expansion，結果帶入xj表達式中即得證。</p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-04-04</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Linear-Algebra/" title="Linear Algebra">Linear Algebra </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/04/04/LA筆記-九-Properties-of-Determinants-and-Cramer-s-Rule/,Roy's Blog,LA筆記:(九)Properties of Determinants and Cramers Rule,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/04/18/%E6%A9%9F%E7%8E%87%E7%B5%B1%E8%A8%88%E7%AD%86%E8%A8%98-%E5%9B%9B-%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8/" title="機率統計筆記:(四)離散隨機變數分布">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/04/03/LA%E7%AD%86%E8%A8%98-%E5%85%AB-Evaluating-Determinator-by-Row-Reduction/" title="LA筆記:(八)Evaluating Determinator by Row Reduction">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

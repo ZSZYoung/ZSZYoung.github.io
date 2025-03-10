@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>機率統計筆記:(二)樣本空間與機率公設 · Roy's Blog</title><meta name="description" content="前言
+此篇記録紀律統計CHAP2關於樣本空間和概率公設的內容。
+樣本空間
+樣本空間定義：
+
+In probability theory, sample space (also called sample description
+space or possibility space) of"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>機率統計筆記:(二)樣本空間與機率公設</a></h3></div><div class="post-content"><h2 id="前言">前言</h2>
+<p>此篇記録紀律統計CHAP2關於樣本空間和概率公設的內容。</p>
+<h2 id="樣本空間">樣本空間</h2>
+<p><strong>樣本空間定義：</strong></p>
+<blockquote>
+<p>In probability theory, sample space (also called sample description
+space or possibility space) of an experiment or random trial is the set
+of all possible outcomes or results of that experiment.
+一試驗所有可能結果的集合稱謂樣本空間，以S表示。</p>
+</blockquote>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210318194748.png" /></p>
+<p><strong>mutually exclusive events(互斥事件)：</strong></p>
+<p>若P(A and B) = 0，則稱AB為互斥事件，即AB沒有交集。 <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210318194018.png" /></p>
+<p><strong>多事件聯集符號與多事件交集符號</strong></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210318194440.png" /></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210318194521.png" /></p>
+<p><strong>complement event符號：</strong></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210318194629.png" /></p>
+<h2 id="demorgans-law">DeMorgan’s law</h2>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210320161018.png" /></p>
+<h2 id="機率公設probability-axioms">機率公設(Probability axioms)</h2>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210320161852.png" /></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210320162134.png" /></p>
+<h2 id="inclusionexclusion-principle排容原理">Inclusion–exclusion
+principle（排容原理）</h2>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210320195129.png" /></p>
+<p><strong>隱含了將聯集轉換為交集處理</strong></p>
+<p>排容原理在機率中應用：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210320195737.png" /></p>
+<p>例如（匹配問題）：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210320201503.png" /></p>
+<p>首先題目求所有男人都拿到別的男人的帽子的概率，我們轉化為求1-P(至少一個男人拿到自己帽子的概率)，
+設Ei,i=1,2,3...,N表示第i人拿到自己帽子的事件，則依據排容原理有至少一人拿到自己帽子概率為(式一)：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210320201824.png" /></p>
+<p>又從N人中挑出n人：Ei1,Ei2,...,Ein這n人都拿到自己帽子的概率為： <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210323202617.png" /></p>
+<p>代換所以有式一即： <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210320202412.png" /></p>
+<p>所以有P(沒有一個男人拿到自己帽子) = 1 -
+P（至少一個男人拿到自己帽子的概率）=</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210320202518.png" /></p>
+<h2 id="需注意的題目">需注意的題目</h2>
+<p><strong>連串問題：</strong></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210323111720.png" /></p>
+<p>首先考慮樣本空間總數為(multiset)：(n+m)!/(n!*m!)
+或者也可以等價考慮為(n+m)取n置n勝。</p>
+<p>設： <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210323112252.png" /></p>
+<p>且令(因為首尾處可以不L，但這樣的話就不能配合後面求取方程正整數解，所以做如下代換完成關於y之方程變量特性的統一)：
+<img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210323112324.png" /></p>
+<p>那麽題目轉化為求以下兩方程之正整數解數乘積除以樣本空間總數: <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210323112429.png" /></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210323112522.png" /></p>
+<p>所以最終結果為:</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210323112607.png" /></p>
+<p><strong>習題1：</strong></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210320163607.png" /></p>
+<p><strong>習題2：</strong></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210323205359.png" /></p>
+<p>計算某數的因數個數時，先將其以質數因式分解，然後結果為各質數之指數加一的乘積（意為不取該因數或取幾個該因數）。</p>
+<h2 id="參考">參考</h2>
+<ul>
+<li>WIKIPEDIA</li>
+<li>https://blog.csdn.net/pdcxs007/article/details/49364781</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-03-18</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Probability-Statistics/" title="Probability&amp;Statistics">Probability&amp;Statistics </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/03/18/機率統計筆記-二-樣本空間與機率公設/,Roy's Blog,機率統計筆記:(二)樣本空間與機率公設,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/03/25/LA%E7%AD%86%E8%A8%98-%E4%B8%89-Inverse-Algebra-properties-of-matrix/" title="LA筆記:(三)Inverse,Algebra(properties of matrix)">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/03/14/%E5%8F%A4%E6%96%87%E5%AD%97%E5%B0%8E%E8%AE%80%E7%AD%86%E8%A8%98-%E4%B8%89-%E7%94%B2%E9%AA%A8%E6%96%87%E7%B0%A1%E5%8F%B2/" title="古文字導讀筆記:(三)甲骨文簡史">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

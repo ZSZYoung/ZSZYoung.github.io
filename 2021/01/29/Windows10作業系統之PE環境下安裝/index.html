@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>Windows10作業系統之PE環境下安裝 · Roy's Blog</title><meta name="description" content="起因
+電腦在約兩週前進入bios時會花屏，控制變量後認為應該不是熒幕的問題，可能是bios或者硬體上的問題。然而但是重啟後還可以正常運作就沒在意，但之後發現電腦越來越卡頓，而且偶爾運作時會花屏。特別是打R6的時候那個每回合載入時間把對面和朋友都折磨的哇哇叫。其實本來也打算快要換電腦了（現在這個太習"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Windows10作業系統之PE環境下安裝</a></h3></div><div class="post-content"><h2 id="起因">起因</h2>
+<p>電腦在約兩週前進入bios時會花屏，控制變量後認為應該不是熒幕的問題，可能是bios或者硬體上的問題。然而但是重啟後還可以正常運作就沒在意，但之後發現電腦越來越卡頓，而且偶爾運作時會花屏。<del>特別是打R6的時候那個每回合載入時間把對面和朋友都折磨的哇哇叫</del>。其實本來也打算快要換電腦了（現在這個太習武之人，內存太小也不夠我多開虛擬機，整個硬體水平也跟不上了），但考慮到最近30系顯卡剛剛部署在移動端，目前的多為嘗鮮機比較貴，且產品線不太穩定，再過幾個月才應該是最佳的換機時間。所以我決定把電腦重裝下,希望再撐上幾個月。之前就用PE系統裝過Win系統，這次算是得心應手。</p>
+<h2 id="事前準備">事前準備</h2>
+<ul>
+<li><p>PE啟動U盤準備
+個人比較推薦使用微PE製作PE啟動盤，東西乾淨而且內置很多有用工具。
+http://www.wepe.com.cn/</p>
+<p>下載後打開選擇安裝PE系統到U盤即可，選項一般選擇默認的就行。</p></li>
+<li><p>ISO檔準備 我們需要準備WIN10的光盤鏡像檔案（ISO檔）。
+在大陸可以在下面網址獲得：https://msdn.itellyou.cn/</p>
+<p>在境外的話推薦直接從MS獲得:https://www.microsoft.com/zh-tw/software-download/windows10</p>
+<p><img
+src="https://raw.githubusercontent.com/ZSZYoung/Images-Host/main/blog/images/20210129153206.png" /></p>
+<p>點擊立即下載工具然後打開，選擇創建安裝媒介，即可下載得到官方iso檔。
+<img
+src="https://raw.githubusercontent.com/ZSZYoung/Images-Host/main/blog/images/20210129153543.png" /></p>
+<p>注意是繁體作業系統環境請下載繁體版作業系統ISO，不然進入PE後安裝時選項會亂碼無法顯示。ISO檔可以存在U盤中，也可以放在機械硬盤/ssd中。</p></li>
+</ul>
+<h2 id="重啟電腦進入bios">重啟電腦進入bios</h2>
+<p>在bios中調整啟動順序使得PE啟動盤啟動順序在最上邊。保存後reboot。</p>
+<h2 id="在pe環境中操作安裝win">在PE環境中操作安裝Win</h2>
+<p>reboot後應該可以順利進入PE環境，在PE環境下的檔案管理器中找到原來準備好的ISO檔（請注意PE下的盤符和常規Win下命名可能不一致）。雙擊掛載後打開Setup即可開始安裝步驟。按照提示選擇需要的選項即可，之後等待安裝完即完成新系統安裝。</p>
+<h2 id="一些可能遇到的問題">一些可能遇到的問題</h2>
+<ul>
+<li>如果要安裝新系統的機械硬盤/ssd空間不足需要格式化時，要連帶把原本系統分隔出的分卷格式化。否則會報錯無法完成自動的分卷。</li>
+<li>進入全新系統後發現動畫不流暢不要擔心，可能是核顯(有核顯下)的驅動過於老舊造成。簡單點可以下載驅動精靈更新下核顯驅動即可獲得流暢動畫體驗。</li>
+<li>盡量選擇在PE下進行新系統安裝。儘管現在可以在本系統中直接用ISO檔進行重裝系統，但是PE下重裝成功率更高且可以應對無法boot的情況。</li>
+<li>error code: 0x8007025D. 改為使用MS官方media creation
+tool後解決，考慮可能是ISO檔多次拷貝的缺失性問題。</li>
+<li>Windows cannot find the Microsoft license software
+terms.改為使用MS官方media creation
+tool後解決，考慮可能是ISO檔多次拷貝的缺失性問題。 <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images129419i155637D4A6E6F1F7.png" /></li>
+</ul>
+<h2 id="獲得重裝介質的其他備選項">獲得重裝介質的其他備選項</h2>
+<ul>
+<li>用rufus配合iso檔製作可boot的USB flash</li>
+<li>使用MS官方的media creation tool將USB flash製作為可boot安裝媒介</li>
+</ul>
+<h2 id="後記">後記</h2>
+<p>更新完系統後確實流暢度得到了很大的改善，但還是出現偶爾花屏且不如原來流暢的情況，考慮應該是確實有硬體上的問題。希望可以再撐幾個月，在比較好的時間點換電腦。
+之前聽說東別重裝個系統都要收好像400左右，清個灰要1000多，真的是嚇死了。這不是有手就行@@，也許我應該開個A同學電腦坊，物美價廉得競爭一下。
+羅列下成本：</p>
+<ul>
+<li>重裝系統：U盤(可反復利用...)</li>
+<li>清灰:
+螺絲器具套裝,硅脂(買好一點一管也就100多點，可以用個好多次)，氣吹等除塵用品，嚴謹點買個防靜電手套、嚴謹點買個放電手環。</li>
+</ul>
+<p>暴利啊，我還學什麼CS，保養電腦都起飛了@@。</p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-01-29</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Win10/" title="Win10">Win10 </a><a class="tag" href="/tags/WinPE/" title="WinPE">WinPE </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/01/29/Windows10作業系統之PE環境下安裝/,Roy's Blog,Windows10作業系統之PE環境下安裝,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/01/30/Linux%E7%B6%B2%E7%B5%A1%E8%99%9B%E6%93%AC%E5%8C%96Netns%E4%B9%8B%E5%9F%BA%E6%9C%AC%E6%8B%93%E6%92%B2%E5%AF%A6%E8%B8%90/" title="Linux網絡虛擬化Netns之基本拓撲實踐">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/01/27/hexo%E5%9D%91%E5%8C%AF%E9%9B%86/" title="Hexo坑匯集">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>LA筆記:(八)Evaluating Determinator by Row Reduction · Roy's Blog</title><meta name="description" content="Theorem:
+倘若方陣有一row或一column全為0，則該方陣的行列式為0
+
+Let A be a square matrix , if A has a row of zeros or a column of
+zeros, then det(A) = 0
+
+對全是0的row或col"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>LA筆記:(八)Evaluating Determinator by Row Reduction</a></h3></div><div class="post-content"><hr />
+<h2
+id="theorem-倘若方陣有一row或一column全為0則該方陣的行列式為0">Theorem:
+倘若方陣有一row或一column全為0，則該方陣的行列式為0</h2>
+<blockquote>
+<p>Let A be a square matrix , if A has a row of zeros or a column of
+zeros, then det(A) = 0</p>
+</blockquote>
+<p>對全是0的row或column使用cofactor expansion(降階法)可明顯得到。</p>
+<hr />
+<h2 id="theorem-方陣的行列式等於其轉置矩陣的行列式">Theorem:
+方陣的行列式等於其轉置矩陣的行列式</h2>
+<blockquote>
+<p>let A be a square matrix,then det(A) = det(A^T)</p>
+</blockquote>
+<p>轉置後原來的row變為column，對其進行降階可明顯得到。</p>
+<hr />
+<h2 id="theorem-做ero時矩陣行列式的變化">Theorem：
+做ERO時矩陣行列式的變化</h2>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210403133058.png" /></p>
+<p>該theorem可以用於在計算複雜矩陣的行列時時對矩陣進行簡化後用簡化矩陣的行列式倒推原矩陣行列式（在row或column湊出儘量多的0或1方便降階運算）</p>
+<p>如：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210403134515.png" /></p>
+<hr />
+<h2 id="theorem-用基本矩陣表示做ero時矩陣行列式的變化">Theorem:
+用基本矩陣表示做ERO時矩陣行列式的變化</h2>
+<blockquote>
+<p>Let E be an n-by-n elementary matrix, then</p>
+<p>det(E (multiply row by non-zero scalar k) ) = k, k≠0</p>
+<p>det(E (interchange two rows) ) = -1</p>
+<p>det(E (adding a scalar multiple of one row to another) ) = 1</p>
+</blockquote>
+<hr />
+<h2 id="vandermonde-matrix范德蒙矩陣">Vandermonde
+matrix(范德蒙矩陣)</h2>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210403141348.png" /></p>
+<p>范德蒙矩陣的行列式計算只要關注第2個column，或者其轉置矩陣的第二個row。</p>
+<p>范德蒙矩陣行列式計算如例：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210403142351.png" /></p>
+<hr />
+<h2 id="參考資料">參考資料</h2>
+<ul>
+<li>University of waterloo math 106:
+https://my.cel.uwaterloo.ca/p/form/courses/search/course/sub/MATH/cat/106/topic/0</li>
+<li>Wikipedia :https://en.wikipedia.org/wiki/Vandermonde_matrix</li>
+<li>https://www.superprof.co.uk/resources/academic/maths/linear-algebra/determinants/vandermonde-determinant.html</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-04-03</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Linear-Algebra/" title="Linear Algebra">Linear Algebra </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/04/03/LA筆記-八-Evaluating-Determinator-by-Row-Reduction/,Roy's Blog,LA筆記:(八)Evaluating Determinator by Row Reduction,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/04/04/LA%E7%AD%86%E8%A8%98-%E4%B9%9D-Properties-of-Determinants-and-Cramer-s-Rule/" title="LA筆記:(九)Properties of Determinants and Cramers Rule">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/04/01/LA%E7%AD%86%E8%A8%98-%E4%B8%83-Determinants%20by%20Cofacotr%20Expansion/" title="LA筆記:(七)Determinants by Cofacotr Expansion">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

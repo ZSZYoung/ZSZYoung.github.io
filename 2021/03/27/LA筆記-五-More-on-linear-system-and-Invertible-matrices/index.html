@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>LA筆記:(五)More on linear system and Invertible matrices · Roy's Blog</title><meta name="description" content="前言
+本篇補充關於方陣的兩個定理及證明
+關於方陣的一個重要定理
+
+If A is an n-by-n matrix, then A is invertible if and only if AX= b
+has exactly one solution. A^-1 · b for every"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>LA筆記:(五)More on linear system and Invertible matrices</a></h3></div><div class="post-content"><h2 id="前言">前言</h2>
+<p>本篇補充關於方陣的兩個定理及證明</p>
+<h2 id="關於方陣的一個重要定理">關於方陣的一個重要定理</h2>
+<blockquote>
+<p>If A is an n-by-n matrix, then A is invertible if and only if AX= b
+has exactly one solution. A^-1 · b for every n-by-1 matrix b.</p>
+</blockquote>
+<p><strong>proof:</strong></p>
+<p>因為需要證明 if and only if,即證明充要條件，所以需要雙向證明。</p>
+<ul>
+<li><p>由前向後證明(方陣A可逆，則方程AX=
+b對於每一個n-by-1的矩陣b只有唯一一解:A^-1 · b)</p>
+<blockquote>
+<p>let K be the solution set of AX=b then</p>
+<p>∀ x ∈ K, Ax=b</p>
+<p>=&gt; A^-1 ·(A·x) = A^-1 · b</p>
+<p>=&gt;(A^-1 ·A) ·x = A^-1 · b</p>
+<p>=&gt; I · x = A^-1 · b</p>
+<p>=&gt; x = A^-1 · b</p>
+<p>i.e. K = {A^-1 · b}</p>
+</blockquote>
+<p>證明思路:對方程引入可逆的特性（A的逆矩陣A<sup>-1），再根據矩陣乘法結合律得出K中只有唯一解A</sup>-1
+· b。</p></li>
+<li><p>由後往前證明(若方程AX= b對於每一個n-by-1的矩陣b只有唯一一解:A^-1
+· b，則方陣A可逆)</p>
+<blockquote>
+<p>∵ AX = b has exactly one solution for every n-by-1 matrix b</p>
+<p>let xj be the solution of the linear system AX = b for b = ej( 0&lt;=
+j &lt;=n )</p>
+<p>i.e. A·x1 = e1, A·x2 = e2, A·x3 = e3</p>
+<p>let B = [x1 x2 ... xn] then</p>
+<p>A·B = A·[x1 x2 ... xn] = [Ax1 Ax2 ... Axn] = [e1 e2... en] = In</p>
+<p>by theorem, A is invertible</p>
+</blockquote>
+<p>證明思路：將n個n-by-1的column
+vector拼湊成一個單位矩陣In，結合可逆矩陣的定義得證A可逆。（**）</p></li>
+</ul>
+<hr />
+<h2
+id="等size方陣乘積矩陣可逆則分開兩者皆可逆兩者皆可逆則其乘積矩陣可逆">等size方陣乘積矩陣可逆則分開兩者皆可逆，兩者皆可逆則其乘積矩陣可逆</h2>
+<blockquote>
+<p>If A,B are square matrices of the same size, then (AB) is invertible
+if and only if both A and B are invertible.</p>
+</blockquote>
+<p><strong>proof:</strong></p>
+<ul>
+<li><p>從前向後（等size方陣乘積矩陣可逆則分開兩者皆可逆）</p>
+<blockquote>
+<p>let C be the inverse of (AB) i.e. C = (AB)^-1</p>
+<p>∴ I = (AB) · C = A (BC)</p>
+<p>i.e. I = A(BC)</p>
+<p>=&gt; A^-1 = (BC)</p>
+<p>=&gt; A is invertible</p>
+<p>and I = C(AB) = (CA)B</p>
+<p>i.e. I = (CA)B</p>
+<p>=&gt; B^-1 = CA</p>
+<p>B is invertible</p>
+</blockquote>
+<p>證明思路：通過可逆特性引入AB的逆矩陣C，接着應用矩陣乘法的結合律構造出A和B分別的逆矩陣，而得證。</p></li>
+<li><p>從後向前（兩等size方陣皆可逆則其乘積矩陣可逆）</p>
+<blockquote>
+<p>∵A,B are invertible</p>
+<p>=&gt; A^-1 , B^-1 exist</p>
+<p>then (AB)(B^-1 · A^-1) = A(B ·B^-1)· A^-1 = A · I · A^-1 = A · A^-1 =
+I</p>
+<p>i.e. (AB)^-1 = B^-1 · A^-1, AB is invertible.</p>
+</blockquote>
+<p>證明思路：證明矩陣AB可逆即證明(AB)(B^-1 · A^-1) =
+I，結合A，B皆可逆的特性和矩陣乘法結合律可以導出，即得證。</p></li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-03-27</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Linear-Algebra/" title="Linear Algebra">Linear Algebra </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/03/27/LA筆記-五-More-on-linear-system-and-Invertible-matrices/,Roy's Blog,LA筆記:(五)More on linear system and Invertible matrices,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/03/28/LA%E7%AD%86%E8%A8%98-%E5%85%AD-Diagonal-Triangular-and-Symmetric-matrices/" title="LA筆記:(六)Diagonal,Triangular and Symmetric matrices">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/03/26/LA%E7%AD%86%E8%A8%98-%E5%9B%9B-Elementary-matrix-and-a-method-for-finding-inverse-matrix/" title="LA筆記:(四)Elementary matrix and a method for finding inverse matrix">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

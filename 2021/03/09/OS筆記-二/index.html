@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>OS筆記(二)CPU與中斷 · Roy's Blog</title><meta name="description" content="前言
+最近老師上課複習了計算機組織中CPU執行指令的過程等內容，此篇整理一下
+Components of CPU
+
+
+Figure2
+
+CPU的簡單結構圖。灰色的部分並非CPU內部組成，只是方便關聯。
+
+Arithmetic logic unit(算術邏輯單元) &amp;gt;The a"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>OS筆記(二)CPU與中斷</a></h3></div><div class="post-content"><h2 id="前言">前言</h2>
+<p>最近老師上課複習了計算機組織中CPU執行指令的過程等內容，此篇整理一下</p>
+<h2 id="components-of-cpu">Components of CPU</h2>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/imagesFigure2.png"
+alt="Figure2" />
+<figcaption aria-hidden="true">Figure2</figcaption>
+</figure>
+<p>CPU的簡單結構圖。灰色的部分並非CPU內部組成，只是方便關聯。</p>
+<ul>
+<li><p>Arithmetic logic unit(算術邏輯單元) &gt;The arithmetic logic unit
+(ALU) performs the arithmetic and logical functions that are the work of
+the computer. The A and B registers hold the input data, and the
+accumulator receives the result of the operation. The instruction
+register contains the instruction that the ALU is to
+perform.算術邏輯單元負責算術和邏輯運算。</p></li>
+<li><p>Instruction register and pointer &gt;The instruction pointer
+specifies the location in memory containing the next instruction to be
+executed by the CPU. When the CPU completes the execution of the current
+instruction, the next instruction is loaded into the instruction
+register from the memory location pointed to by the instruction pointer.
+指令指針指向Memory中下一條要執行的指令位置，CPU結束當前指令運作後，將下一條指令由指令指針位置載入到指令暫存器。</p></li>
+<li><p>Cache</p>
+<blockquote>
+<p>The CPU never directly accesses RAM. Modern CPUs have one or more
+layers of cache. The CPU's ability to perform calculations is much
+faster than the RAM's ability to feed data to the CPU.
+為了解決CPU運算速度和Memory存取速度之間的鴻溝，用cache作為中間橋樑加速資料存取。</p>
+</blockquote></li>
+<li><p>Memory management unit</p>
+<blockquote>
+<p>The memory management unit (MMU) manages the data flow between the
+main memory (RAM) and the CPU. MMU管理CPU與memory之間的數據流通。</p>
+</blockquote></li>
+<li><p>CPU clock and control unit</p>
+<blockquote>
+<p>All of the CPU components must be synchronized to work together
+smoothly. The control unit performs this function at a rate determined
+by the clock speed and is responsible for directing the operations of
+the other units by using timing signals that extend throughout the CPU.
+所有的CPU組件由CU進行同步運作，而同步的rate由CPU clock決定。</p>
+</blockquote></li>
+</ul>
+<hr />
+<h2 id="x86暫存器">X86暫存器</h2>
+<p>https://en.wikibooks.org/wiki/X86_Assembly/X86_Architecture</p>
+<hr />
+<h2 id="instruction-cycle">Instruction Cycle</h2>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210309105442.png"
+alt="20210309105442" />
+<figcaption aria-hidden="true">20210309105442</figcaption>
+</figure>
+<hr />
+<h2 id="addressing-mode">Addressing Mode</h2>
+<p><em>這部分內容整理有點多TODO</em></p>
+<hr />
+<h2 id="中斷類型8086">中斷類型(8086)：</h2>
+<ul>
+<li><p>Hardware Interrupts</p>
+<blockquote>
+<p>Hardware interrupts are those interrupts which are caused by any
+peripheral device by sending a signal through a specified pin to the
+microprocessor. There are two hardware interrupts in 8086
+microprocessor. They are:</p>
+</blockquote>
+<blockquote>
+<ol type="A">
+<li>NMI (Non Maskable Interrupt) – It is a single pin non maskable
+hardware interrupt which cannot be disabled. It is the highest priority
+interrupt in 8086 microprocessor. After its execution, this interrupt
+generates a TYPE 2 interrupt. IP is loaded from word location 00008 H
+and CS is loaded from the word location 0000A H.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" type="A">
+<li>INTR (Interrupt Request) – It provides a single interrupt request
+and is activated by I/O port. This interrupt can be masked or delayed.
+It is a level triggered interrupt. It can receive any interrupt type, so
+the value of IP and CS will change on the interrupt type received.</li>
+</ol>
+</blockquote></li>
+<li><p>Software Interrupts</p>
+<blockquote>
+<p>These are instructions that are inserted within the program to
+generate interrupts. There are 256 software interrupts in 8086
+microprocessor. The instructions are of the format INT type where type
+ranges from 00 to FF. The starting address ranges from 00000 H to 003FF
+H. These are 2 byte instructions. IP is loaded from type * 04 H and CS
+is loaded from the next address give by (type * 04) + 02 H. Some
+important software interrupts are:</p>
+</blockquote>
+<blockquote>
+<ol type="A">
+<li>TYPE 0 corresponds to division by zero(0).</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" type="A">
+<li>TYPE 1 is used for single step execution for debugging of
+program.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" type="A">
+<li>TYPE 2 represents NMI and is used in power failure conditions.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="4" type="A">
+<li>TYPE 3 represents a break-point interrupt.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="5" type="A">
+<li>TYPE 4 is the overflow interrupt.</li>
+</ol>
+</blockquote></li>
+</ul>
+<hr />
+<h2 id="中斷處理流程-thx-to-alex-dzyoba">中斷處理流程 (thx to Alex
+Dzyoba)</h2>
+<p><em>TODO</em></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/imagesinterrupts.jpg"
+alt="interrupts" />
+<figcaption aria-hidden="true">interrupts</figcaption>
+</figure>
+<h4 id="programmable-interrupt-controller-pic">Programmable Interrupt
+Controller (PIC)</h4>
+<h4 id="interrupt-descriptor-table-idt">Interrupt Descriptor Table
+(IDT)</h4>
+<p>什麽是IDT: &gt;Interrupt descriptor table (IDT) is an x86 system
+table that holds descriptors for Interrupt Service Routines (ISRs) or
+simply interrupt handlers.</p>
+<p>IDT與IVT(interrupt vector table)區別:</p>
+<h4 id="interrupt-service-routines-isrs">Interrupt Service Routines
+(ISRs)</h4>
+<hr />
+<h2 id="polling">Polling</h2>
+<blockquote>
+<p>輪詢（Polling）是一種CPU決策如何提供週邊裝置服務的方式，又稱「程式控制輸入輸出」（Programmed
+I/O）。輪詢法的概念是：由CPU定時發出詢問，依序詢問每一個週邊裝置是否需要其服務，有即給予服務，服務結束後再問下一個週邊，接著不斷週而復始。</p>
+</blockquote>
+<h2 id="參考">參考</h2>
+<ul>
+<li>https://www.redhat.com/sysadmin/cpu-components-functionality</li>
+<li>https://alex.dzyoba.com/blog/os-interrupts/</li>
+<li>https://www.geeksforgeeks.org/interrupts-in-8086-microprocessor/</li>
+<li>Wikipidea</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-03-09</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Opreating-System/" title="Opreating System">Opreating System </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/03/09/OS筆記-二/,Roy's Blog,OS筆記(二)CPU與中斷,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/03/14/%E5%8F%A4%E6%96%87%E5%AD%97%E5%B0%8E%E8%AE%80%E7%AD%86%E8%A8%98-%E4%B8%89-%E7%94%B2%E9%AA%A8%E6%96%87%E7%B0%A1%E5%8F%B2/" title="古文字導讀筆記:(三)甲骨文簡史">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/03/05/%E5%8F%A4%E6%96%87%E5%AD%97%E5%B0%8E%E8%AE%80%E7%AD%86%E8%A8%98-%E4%BA%8C-%E5%BE%9E%E5%9C%96%E7%95%AB%E7%AC%A6%E8%99%9F%E5%88%B0%E6%96%87%E5%AD%97/" title="古文字導讀筆記:(二)從圖畫符號到文字">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

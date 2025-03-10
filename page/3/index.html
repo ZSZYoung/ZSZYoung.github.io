@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>Roy's Blog</title><meta name="description" content="何如暮暮與朝朝，更改卻，年年歲歲。"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a class="current" href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)" style="display:none;"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/10/19/MLG%E7%AC%94%E8%AE%B0-%E4%B8%83-Node-Embeddings/">MLG笔记:(七) Node Embeddings</a></h3></div><div class="post-content"><p>
+Traditional ML for Graphs
+
+在傳統的Graph ML中我們通過Feature engineering
+處理原始輸入的graph得到Structured
+Feature，再將這些結構化的特征輸入ML演算法中得到可供預測用的機器學習模型。
+
+Graph Representat...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-10-19</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning </a><a class="tag" href="/tags/GraphML/" title="GraphML">GraphML </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/10/14/ML%E7%AC%94%E8%AE%B0-%E4%B8%89-Feasibility-of-Learning/">ML笔记:(三) Feasibility of Learning</a></h3></div><div class="post-content"><p>
+Infeasibility of Learning
+
+All learning algorithm has its assumptions behind. No algorithm is
+best for all learning problems.
+
+
+上圖中
+對於data set中的所有個例...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-10-14</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/10/12/ML%E7%AC%94%E8%AE%B0-%E4%BA%8C-The-Learning-Problems/">ML笔记:(二) The Learning Problems</a></h3></div><div class="post-content"><p>
+Outline
+Lecture 2: The Learning Problems
+
+Learning with Different Output Space 
+Learning with Different Data Label 
+Learning with Different Protocol ...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-10-12</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/10/06/ML%E7%AC%94%E8%AE%B0-%E4%B8%80-Basics-of-Machine-Learning/">ML笔记:(一) Basics of Machine Learning</a></h3></div><div class="post-content"><p>
+前言
+本筆記來自台大林軒田老師的CSIE5043 Machine Learning
+2021FALL課程，於此做一個學習記錄。
+
+What is Machine Learning
+
+
+skill: improve some performance measure(e.g. prediction ...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-10-06</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/10/04/MLG%E7%AC%94%E8%AE%B0-%E5%85%AD-Traditional-feature-based-methods-Graph-level-features/">MLG笔记:(六) Traditional feature-based methods: Graph-level features</a></h3></div><div class="post-content"><p>
+
+Goal: We want features that characterize the structure of an entire
+graph
+
+Background: Kernel Methods
+Idea: Design kernels instead of feature vectors...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-10-04</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning </a><a class="tag" href="/tags/GraphML/" title="GraphML">GraphML </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/10/03/MLG%E7%AC%94%E8%AE%B0-%E4%BA%94-Traditional-feature-based-methods-Link-level-features/">MLG笔记:(五) Traditional feature-based methods: Link-level features</a></h3></div><div class="post-content"><p>
+
+Link-level Prediction: predict new links based on existing links.
+The key is to design features for a pair of nodes. &gt;
+
+
+Two formulations
+of the ...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-10-03</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning </a><a class="tag" href="/tags/GraphML/" title="GraphML">GraphML </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/09/30/MLG%E7%AC%94%E8%AE%B0-%E5%9B%9B-Traditional-feature-based-methods-Node-level-features/">MLG笔记:(四) Traditional feature-based methods: Node-level features</a></h3></div><div class="post-content"><p>
+Motivation
+
+We wanna be able to create additional features that will describe how
+this particular node is positioned in the rest of the network, and wha...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-09-30</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning </a><a class="tag" href="/tags/GraphML/" title="GraphML">GraphML </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/09/23/MLG%E7%AC%94%E8%AE%B0-%E4%B8%89-Choice-of-Graph-Representation/">MLG笔记:(三) Choice of Graph Representation</a></h3></div><div class="post-content"><p>
+Components of a
+Network(graph)
+
+Object: nodes,vertices   
+Interactions: links,edges   
+System: network,graph   
+
+
+Types of graph
+
+有向圖與無向圖的選擇：
+
+...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-09-23</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning </a><a class="tag" href="/tags/GraphML/" title="GraphML">GraphML </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/09/23/MLG%E7%AC%94%E8%AE%B0-%E4%BA%8C-Applications-of-Graph-ML/">MLG笔记:(二) Applications of Graph ML</a></h3></div><div class="post-content"><p>Different tasks of GraphML
+
+
+Node classification: Predict a property of a node.(e.g. Categorize
+online users)
+Link prediction: Predict whether there are...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-09-23</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning </a><a class="tag" href="/tags/GraphML/" title="GraphML">GraphML </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/09/23/MLG%E7%AC%94%E8%AE%B0-%E4%B8%80-Motivation-for-Graph-ML/">MLG笔记:(一) Motivation for Graph ML</a></h3></div><div class="post-content"><p>Why Graph?
+Graph體現了entities(nodes)之間的聯繫，這些聯繫構成一個network。許多的數據都可以自然的用graph來建模表示，例如計算機網路、疾病傳染路徑、社交網路等。即graph有廣泛的應用空間。
+
+課程討論的主要問題：
+
+How do we take advantag...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-09-23</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning </a><a class="tag" href="/tags/GraphML/" title="GraphML">GraphML </a><span class="leancloud_visitors"></span></div></div></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/page/2/">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/page/4/">Next</a></li></ul></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

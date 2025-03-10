@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>網路中Socket概念的理解 · Roy's Blog</title><meta name="description" content="前言
+Socket是網路編程中常常能聽到的一個概念，自己對這個概念的理解一直比較模糊，借這篇文章釐清概念。
+談談官方的Socket理解
+先看看wiki中的定義： &amp;gt; A network socket is a software structure
+within a network no"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>網路中Socket概念的理解</a></h3></div><div class="post-content"><h2 id="前言">前言</h2>
+<p>Socket是網路編程中常常能聽到的一個概念，自己對這個概念的理解一直比較模糊，借這篇文章釐清概念。</p>
+<h2 id="談談官方的socket理解">談談官方的Socket理解</h2>
+<p>先看看wiki中的定義： &gt; A network socket is a software structure
+within a network node of a computer network that serves as an endpoint
+for sending and receiving data across the network.</p>
+<p>簡單翻譯一下：socket是計算機網路中資料傳送和接收的端點。</p>
+<p>再看看不同面向下socket的意義：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/v2-2300584e2919c3818df8c08ed556234c_720w.jpg" /></p>
+<ul>
+<li>對於作業系統內核來說，socket是進程溝通的端點</li>
+<li>對於應用來說，socket是應用從網路讀寫的文件描述符</li>
+</ul>
+<p>再看看socket的位置：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images/圖片1.jpg" /></p>
+<p>可見Socket位於應用層和傳輸層(TCP/UDP)之間，負責應用層和應用層以下協議棧之間的信息交互。</p>
+<p>以下為例(向1.2.3.4的80port通過tcp協定發送字串"Hello, world!")：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Socket mysocket = getSocket(type = <span class="string">&quot;TCP&quot;</span>)</span><br><span class="line">connect(mysocket, address = <span class="string">&quot;1.2.3.4&quot;</span>, port = <span class="string">&quot;80&quot;</span>)</span><br><span class="line">send(mysocket, <span class="string">&quot;Hello, world!&quot;</span>)</span><br><span class="line">close(mysocket)</span><br></pre></td></tr></table></figure>
+<p>https://en.wikipedia.org/wiki/Network_socket</p>
+<h2 id="通俗的談談socket理解">通俗的談談socket理解</h2>
+<p>個人理解socket就是不同計算機中不同進程之間交互的工具，並且socket向應用層提供了簡單的接口，不用在編寫應用層程式時對L4及以下網路協議棧深入。</p>
+<h2 id="補充">補充</h2>
+<ul>
+<li>socket address: (transport protocol,IPA,port number)</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-02-13</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Network-Sokcet/" title="Network Sokcet">Network Sokcet </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/02/13/網路中Socket概念的理解/,Roy's Blog,網路中Socket概念的理解,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/02/15/Linux%E4%B8%8BFile-descriptor%E7%90%86%E8%A7%A3/" title="Linux下File descriptor理解">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/02/11/Debian%E4%B8%8BVLAN%E7%B0%A1%E5%96%AE%E5%AF%A6%E8%B8%90/" title="Debian下VLAN簡單配置實踐">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

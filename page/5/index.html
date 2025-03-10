@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>Roy's Blog</title><meta name="description" content="何如暮暮與朝朝，更改卻，年年歲歲。"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a class="current" href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)" style="display:none;"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/05/04/%E6%A9%9F%E7%8E%87%E7%B5%B1%E8%A8%88%E7%AD%86%E8%A8%98-%E4%BA%94-%E9%80%A3%E7%BA%8C%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E5%88%86%E5%B8%83/">機率統計筆記:(五)連續隨機變數分布</a></h3></div><div class="post-content"><p>前言
+之前討論的都是離散型的分布，意即隨機變數的取值是可數的。而本章討論取值不可數的連續情況。
+
+連續隨機變數的機率密度函數和累積分布函數
+類似於離散型隨機變數的機率質量函數(PMF),連續隨機變數有相似概念的機率密度函數(PDF):
+對於累積分布函數,存在滿足：
+
+那麼X為連續隨機變數，其PDF為...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-05-04</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Probability-Statistics/" title="Probability&amp;Statistics">Probability&amp;Statistics </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/05/02/%E7%82%BAHexo%E6%94%AF%E6%8C%81%E6%B8%B2%E6%9F%93LaTeX/">為Hexo支持渲染LaTeX</a></h3></div><div class="post-content"><p>前言
+
+為了整理數學公式和推導的美觀性，在之前的文章中引入了LaTeX的語法。在編輯器上顯示正常，但當hexo
+g後生成的網頁中LaTeX語法沒有得到正確渲染。以下將為Hexo添加支持LaTex語法。
+注意：有些hexo主題本身就支持LaTeX渲染，根據readme打開即可
+歷程
+
+筆者在網路上看了...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-05-02</span><i class="fa fa-tag"></i><a class="tag" href="/tags/LaTeX/" title="LaTeX">LaTeX </a><a class="tag" href="/tags/Hexo/" title="Hexo">Hexo </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/05/01/LaTeX%E5%B8%B8%E7%94%A8%E8%AA%9E%E6%B3%95%E8%A8%98%E9%8C%84/">LaTeX常用語法記錄</a></h3></div><div class="post-content"><p>前言
+
+因為寫文章時常會要記錄一些數學公式，為了公式的美觀則需使用LaTeX語法。以下逐漸積累一些自己常用的LaTeX語法。
+希臘字母
+
+\beta = 
+\gamma = 
+\mu = 
+\phi = 
+\rho = 
+\lambda = 
+字母上下標
+
+上標：
+a^{1} = 
+...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-05-01</span><i class="fa fa-tag"></i><a class="tag" href="/tags/LaTeX/" title="LaTeX">LaTeX </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/04/30/LA%E7%AD%86%E8%A8%98-%E5%8D%81%E4%B8%80-Compositions-of-matrix-transformation/">LA筆記:(十一) Compositions of matrix transformation</a></h3></div><div class="post-content"><p>線性轉移的組合
+
+Def:
+
+if :U-&gt;V, :V-&gt;W are linear transformation,
+then composition of T2 with T1, denoted by o, is the function defined by (o)(u) = ((u))....</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-04-30</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Linear-Algebra/" title="Linear Algebra">Linear Algebra </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/04/21/LA%E7%AD%86%E8%A8%98-%E5%8D%81-Introduction-to-linear-transformation/">LA筆記:(十)Introduction to linear transformation</a></h3></div><div class="post-content"><p>Linear
+Transformation(線性轉移)
+Def:
+
+let V and W be vector space(over F). A function T: V -&gt; W is
+called a linear transformation from V to W if for all ...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-04-21</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Linear-Algebra/" title="Linear Algebra">Linear Algebra </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/04/18/%E6%A9%9F%E7%8E%87%E7%B5%B1%E8%A8%88%E7%AD%86%E8%A8%98-%E5%9B%9B-%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8/">機率統計筆記:(四)離散隨機變數分布</a></h3></div><div class="post-content"><p>Random Variable(隨機變數)
+定義：
+
+給定樣本空間(S,F)，如果其上的實值函數X:S-&gt;R 是
+F(實值)可測函數，則稱X為（實值）隨機變數。
+
+隨機變數是一種關於樣本空間的函數 
+
+Cumulative
+Distribution Function(累積分佈函數)
+
+...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-04-18</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Probability-Statistics/" title="Probability&amp;Statistics">Probability&amp;Statistics </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/04/04/LA%E7%AD%86%E8%A8%98-%E4%B9%9D-Properties-of-Determinants-and-Cramer-s-Rule/">LA筆記:(九)Properties of Determinants and Cramers Rule</a></h3></div><div class="post-content"><p>行列式的一些性質
+
+
+If A is an n-by-n matrix, then det(k·A) = k^n · det(A)
+因為k對A的影響體現在每次降階中，一共n次降階帶來n個k相乘的影響。
+det(A+B) ≠ det(A) + det(B)
+但在特殊情況下會成立：矩陣AB僅僅在某一row...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-04-04</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Linear-Algebra/" title="Linear Algebra">Linear Algebra </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/04/03/LA%E7%AD%86%E8%A8%98-%E5%85%AB-Evaluating-Determinator-by-Row-Reduction/">LA筆記:(八)Evaluating Determinator by Row Reduction</a></h3></div><div class="post-content"><p>
+Theorem:
+倘若方陣有一row或一column全為0，則該方陣的行列式為0
+
+Let A be a square matrix , if A has a row of zeros or a column of
+zeros, then det(A) = 0
+
+對全是0的row或column使用...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-04-03</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Linear-Algebra/" title="Linear Algebra">Linear Algebra </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/04/01/LA%E7%AD%86%E8%A8%98-%E4%B8%83-Determinants%20by%20Cofacotr%20Expansion/">LA筆記:(七)Determinants by Cofacotr Expansion</a></h3></div><div class="post-content"><p>Determinant(行列式)
+低階數矩陣的行列式計算
+
+這邊三階行列式公式用降階的方法得到。
+
+Minor and Cofactor
+
+if A is a square matrix, then the minor(子式) of entry aij, denoted
+by Mij, is de...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-04-01</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Linear-Algebra/" title="Linear Algebra">Linear Algebra </a><span class="leancloud_visitors"></span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2021/03/30/%E6%A9%9F%E7%8E%87%E7%B5%B1%E8%A8%88%E7%AD%86%E8%A8%98-%E4%B8%89-%E6%A2%9D%E4%BB%B6%E6%A9%9F%E7%8E%87%E3%80%81%E8%B2%9D%E6%B0%8F%E5%AE%9A%E7%90%86%E8%88%87%E7%8D%A8%E7%AB%8B%E4%BA%8B%E4%BB%B6/">機率統計筆記:(三)條件機率，貝氏定理，相互獨立事件</a></h3></div><div class="post-content"><p>Conditional
+Probability(條件機率)
+Def：
+
+In probability theory, conditional probability is a measure of the
+probability of an event occurring, given that ano...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-03-30</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Probability-Statistics/" title="Probability&amp;Statistics">Probability&amp;Statistics </a><span class="leancloud_visitors"></span></div></div></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/page/4/">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/page/6/">Next</a></li></ul></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

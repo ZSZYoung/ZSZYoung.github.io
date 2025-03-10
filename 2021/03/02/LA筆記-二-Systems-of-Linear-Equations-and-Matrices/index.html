@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>LA筆記:(二)Systems of Linear Equations and Matrices · Roy's Blog</title><meta name="description" content="前言
+此篇是關於CHAP1：線性方程組與矩陣的筆記。
+System of Linear Equations
+相關定義
+Def of equation:
+
+A mathematical sentence with an equal sign (=) to indicate that two"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>LA筆記:(二)Systems of Linear Equations and Matrices</a></h3></div><div class="post-content"><h2 id="前言">前言</h2>
+<p>此篇是關於CHAP1：線性方程組與矩陣的筆記。</p>
+<h2 id="system-of-linear-equations">System of Linear Equations</h2>
+<h4 id="相關定義">相關定義</h4>
+<p><strong>Def of equation:</strong></p>
+<blockquote>
+<p>A mathematical sentence with an equal sign (=) to indicate that two
+expressions name the same number</p>
+</blockquote>
+<p>用等號表明其兩邊數學表達式數值相同的式子叫做等式</p>
+<p>如:</p>
+<p>x^3 + y^3 = 9 , 3x + 2y = 0, sinx + 2y = 0</p>
+<p><strong>Def of linear equation:</strong></p>
+<blockquote>
+<p>A linear equation in the n variable x1,x2,x3....,xn is defined to be
+one that can be expressed in the form a1x1+a2x2+a3x3+....+anxn = b,
+where a1,a2,...,an and b are constant.</p>
+</blockquote>
+<p>如:</p>
+<p>x - y + 3Z = 1</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li><p>a1x1+a2x2+.....+anxn is called a <strong>homogeneous</strong>
+linear equation if b=0,otherwise,it's called nonhomogeneous.
+常數項為0的線性方程稱為齊次線性方程，反之為非齊次。</p></li>
+<li><p>A finite set of linear equations is called a system of linear
+equations or a linear system. The variables are called unknows.
+有限的線性方程集合稱為線性方程組，其中變數稱為unknow。</p></li>
+</ul>
+<p>線性方程組的表達方式：</p>
+<ul>
+<li>general form</li>
+</ul>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210302104639.png" /></p>
+<ul>
+<li>matrix eqution</li>
+</ul>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210302104758.png" /></p>
+<p>where A is called the coefficient matrix(係數矩陣), X is called the
+solution vector, b is called the constant vector.</p>
+<p><strong>Def of Augmented matrix（增廣矩陣） of the linear
+system:</strong></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210302105506.png" /></p>
+<p>如：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210302105547.png" /></p>
+<p>當僅僅constant vecotr(b)不同時，可以簡單的表示幾個增廣矩陣為：</p>
+<p>AX=b, with b=b1,b2,b3 表示為：[A|b1|b2|b3] -&gt;(ERO)
+[A'|b1'|b2'|b3']</p>
+<hr />
+<h4 id="gaussjordan-elimination高斯約當消去法">Gauss–Jordan
+elimination（高斯約當消去法）</h4>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/imagesGJＥ2.jpg" /></p>
+<p>由高斯消去法(forward pass)得到REF,再經由約旦的方法(backward
+pass)消去leading1所在column得到RREF，由RREF即可得到general solution.</p>
+<p>Types of Elementary row operations:</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210302110411.png" /></p>
+<ul>
+<li>row交換操作：矩陣中互換兩個row位置</li>
+<li>row乘法操作：矩陣某一row中每一個元素同時乘以某非0常數</li>
+<li>row加法操作：矩陣中某一row可被本row和其他row的倍數和替代</li>
+</ul>
+<p>Elementary row operations合理性驗證：</p>
+<ul>
+<li>交換操作：互相兩row條件之間為and關係，而and關係滿足交換律，故可以交換</li>
+<li>乘法操作：元素同時擴大不影響解集(Solution set k = solution set
+k')，而當同乘0時原線性方程組的解集將變化(Solution set k != solution set
+k')</li>
+<li>加法操作：即帶入消元法應用</li>
+</ul>
+<blockquote>
+<p>Gaussian elimination, also known as row reduction, is an algorithm in
+linear algebra for solving a system of linear equations.</p>
+</blockquote>
+<p><strong>Def of Row echelon form(階梯型矩陣):</strong></p>
+<blockquote>
+<ul>
+<li>Any row consisting entirely of zeros occurs at the bottom of the
+matrix.全是0的row置於底部</li>
+<li>For each row that does not contain entirely zeros, the first
+non-zero entry is 1 (called a leading
+1).每一個非全0row的第一個非0項是1，這個項叫做leading 1</li>
+<li>For two successive (non-zero) rows, the leading 1 in the higher row
+is further left than the leading one in the lower row.
+對於兩個連續的非全0row，上邊row的leading 1較下邊row於更左邊。</li>
+</ul>
+</blockquote>
+<p>some facts of about REF: * REF of A are not unique * RREF of A is
+unique * The leading 1 always occur in the same positions in A, those
+are called the <strong>pivot(樞紐) position</strong> of A. * Pivot
+column: a column of A that has leading 1 * Pivot row: a row of A that
+has leading 1 * A <strong>nonzero entry</strong> in a pivot position of
+A is called a pivot of A</p>
+<p>例子： Find (1)pivot rows (2)pivot columns (3)pivots of A where: <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210307222935.png" /></p>
+<p>通過ERO獲得REF：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210307223124.png" /></p>
+<p>所以： (1):pivot rows:1,2,3 (2):pivot columns:1,3,5 (3):pivots of A:
+-10,-5</p>
+<p><strong>Def of Reduced row echelon form</strong> &gt;* 滿足REF的定義
+&gt;* each column that contains a leading 1 has zeros everywhere else in
+this column. 含有leading 1的column其餘項皆為0</p>
+<p><strong>Steps for Gauss-Jordan Elimination：</strong></p>
+<ol type="1">
+<li>Swap the rows so that all rows with all zero entries are on the
+bottom. 將全是0的row置於底部</li>
+<li>Swap the rows so that the row with the largest, leftmost nonzero
+entry is on top. 將左端第一個非0項最大的row置於頂部</li>
+<li>Multiply the top row by a scalar so that top row's leading entry
+becomes 1. 將最頂端row乘以某數(純量)使其獲得leading 1.</li>
+<li>Add/subtract multiples of the top row to the other rows so that all
+other entries in the column containing the top row's leading entry are
+all zero.
+使用ERO中的加法操作使得頂端row的leading1所在column其他全為0</li>
+<li>Repeat steps 2-4 for the next leftmost nonzero entry until all the
+leading entries are 1. 重複步驟2-4直到得到所有leading1</li>
+<li>Swap the rows so that the leading entry of each nonzero row is to
+the right of the leading entry of the row above
+it.交換row位置使得上邊row的leading位置均在下邊row左邊</li>
+</ol>
+<p>高斯約旦消去法例子：</p>
+<p>試解綫性系統：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210306130211.png" /></p>
+<p>解： <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images1.jpg"
+alt="1" /></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images3.jpg"
+alt="3" />
+<figcaption aria-hidden="true">3</figcaption>
+</figure>
+<hr />
+<p><strong>Def of a solution of a linear system:</strong> &gt; A
+solution of a linear system in n knowns x1,x2,...,xn is a sequence of n
+numbers s1,s2,...,sn such that each equation is satisfied when we
+substitute x1 = s1, x2 = s2,..., xn = sn.</p>
+<p><strong>Def of set of all solutions of a linear system:</strong> &gt;
+The set of all solution of a linear system is called its solution set or
+the general solution.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>solution vector <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210306131932.png" /></li>
+<li>A linear system is consistent(相容的) if it has at least one
+solution and inconsistent if it has no solution.</li>
+</ul>
+<p><strong>Theorem:</strong></p>
+<blockquote>
+<p>every system of linear equations has either no solutions, exactly one
+solution, or infinitely many solutions.
+線性系統要麽沒解，要麽有唯一解，要麽由無窮多解。</p>
+</blockquote>
+<p>無解情況：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210307214127.png" /></p>
+<p>可解得REF：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210307214611.png" /></p>
+<p>對於最下邊row而言，0=-17顯然衝突，無解。</p>
+<p>證明綫性系統不會有大於一個有窮解:</p>
+<p>proof:</p>
+<p>suppose that the linear system AX=b has finite solutions, say x1,x2
+are two distinct solution of AX=b. i.e. A * x1 = b, A * x2 = b then let
+X = x1 + k(x2-x1),k is a scalar</p>
+<p>=&gt; A * X = A * (x1+k(x2-x1)) = Ax1 + k(Ax2-Ax1) = b + k(b-b) =
+b</p>
+<p>i.e. X = x1 + k(x2-x1),k∈R is the solution of the AX=b.It fellows
+that the linear system AX=b has infinitely many solution.</p>
+<p>假設有兩個相異解-&gt;有這兩解構造某含參數解-&gt;得到結論（兩個相異解會產生無窮多組解）-&gt;
+綫性系統不會有大於一個有窮解</p>
+<h4 id="homogeneous齊次-linear-system">Homogeneous（齊次） linear
+system</h4>
+<p>形如: AX=0</p>
+<p>properties:</p>
+<ul>
+<li>X=0 is the trivial solution of AX=0 and hence AX=0 is
+consistent</li>
+<li>AX=0 has exactly one solution or infinitely many solution</li>
+</ul>
+<p><strong>Theorem:</strong> &gt; if a homogeneous linear system has n
+unknowns, and if the reduced row echelon form of its augmented matrix
+has r nonzero rows,r&lt;=n,then the linear system has n-r free
+variables.</p>
+<p>proof of this theorem:</p>
+<p>The reduced row echelon form of its augmented matrix has r nonzero
+rows -&gt; it fellows that the homogeneous linear system has r
+leading1's variable</p>
+<p>also number of leading1's variables + number of free variables = n
+-&gt; number of free variables = n - number of leading 1's variables = n
+- r</p>
+<h2 id="後記">後記</h2>
+<p>注意： *
+某矩陣的RREF最後一row全為0並不能代表該系統一定有無窮多組解。因為原矩陣可能equation數大於unknown數，即原矩陣中可能有冗餘的條件。</p>
+<h2 id="參考">參考</h2>
+<ul>
+<li>wikipedia</li>
+<li>https://www.statlect.com/matrix-algebra/augmented-matrix</li>
+<li>https://online.stat.psu.edu/statprogram/reviews/matrix-algebra/gauss-jordan-elimination</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-03-02</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Linear-Algebra/" title="Linear Algebra">Linear Algebra </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/03/02/LA筆記-二-Systems-of-Linear-Equations-and-Matrices/,Roy's Blog,LA筆記:(二)Systems of Linear Equations and Matrices,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/03/05/%E5%8F%A4%E6%96%87%E5%AD%97%E5%B0%8E%E8%AE%80%E7%AD%86%E8%A8%98-%E4%BA%8C-%E5%BE%9E%E5%9C%96%E7%95%AB%E7%AC%A6%E8%99%9F%E5%88%B0%E6%96%87%E5%AD%97/" title="古文字導讀筆記:(二)從圖畫符號到文字">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/03/01/%E6%A9%9F%E7%8E%87%E7%B5%B1%E8%A8%88%E7%AD%86%E8%A8%98-%E4%B8%80-%E6%8E%92%E5%88%97%E7%B5%84%E5%90%88%E8%A4%87%E7%BF%92/" title="機率統計筆記:(一)排列組合">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>

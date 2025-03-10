@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Roy Huang"><title>LA筆記:(四)Elementary matrix and a method for finding inverse matrix · Roy's Blog</title><meta name="description" content="前言
+本篇介紹基本矩陣E的概念和應用，及方陣的一些等價表達。
+Elementary Matrix（基本矩陣）
+定義：
+
+An n-by-n matrix is called an elementary matrix if it can be obtained
+from the n-by-"><meta name="keywords" content="Blog, Computer Science"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- 加入测试--><!--link (rel="icon", href= url_for('images/favicon.ico')) --><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Roy's Blog</a></h3><div class="description"><p>何如暮暮與朝朝，更改卻，年年歲歲。</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/ZSZYoung"><i class="fa fa-github"></i></a></li></ul><div class="footer"><div class="p"> <span>©  </span><i class="fa fa-star"></i><span> Roy Huang</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><a href="https://github.com/mrcore/hexo-theme-Anatole-Core" target="_blank">Anatole-Core  </a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li><li><a href="/tags">Tags</a></li><li><a href="/about">About</a></li><li><a href="/guestbook">Guestbook</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>LA筆記:(四)Elementary matrix and a method for finding inverse matrix</a></h3></div><div class="post-content"><h2 id="前言">前言</h2>
+<p>本篇介紹基本矩陣E的概念和應用，及方陣的一些等價表達。</p>
+<h2 id="elementary-matrix基本矩陣">Elementary Matrix（基本矩陣）</h2>
+<p>定義：</p>
+<blockquote>
+<p>An n-by-n matrix is called an elementary matrix if it can be obtained
+from the n-by-n identity matrix In by performing a single elementary row
+operation.</p>
+<p>由單位矩陣通過一次ERO得到的矩陣稱為基本矩陣。</p>
+</blockquote>
+<h4 id="以基本矩陣表達ero">以基本矩陣表達ERO</h4>
+<blockquote>
+<p>if B obtained from A by n step of EROs,then</p>
+<p>then B = (En·En-1...E2·E1)· A where Ej,1&lt;=j&lt;=n,is the jth
+elementary matrix corresponding to the jth elementary row operation
+respectively.</p>
+<p>將每一次ERO通過一個E來表達，將EROs的疊加通過Ej的乘積表達。提供了一種數學上的規範ERO表達。注意E要連乘式中要置於被操作矩陣前。</p>
+</blockquote>
+<h4 id="基本矩陣的逆矩陣">基本矩陣的逆矩陣</h4>
+<blockquote>
+<p>every elementary matrix is invertible and the inverse is also an
+elementary matrix of the same type.(3 types below:)</p>
+</blockquote>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210326215043.png" /></p>
+<p>基本矩陣必可逆並且其逆矩陣(E^-1)可以通過原ERO的變化操作得到：</p>
+<ul>
+<li>原ERO為交換兩row，E^-1同樣交換兩row得到</li>
+<li>原ERO為row純量乘法，E^-1通過同一row乘以該純量的倒數得到</li>
+<li>原ERO為將k倍某row加到另一row，E^-1將(-k)倍同一row加到另一row</li>
+</ul>
+<p>我們可以通過ERO（基本矩陣）得到某矩陣之RREF，那麽同樣的可以通過E^-1對RREF進行倒退。基本矩陣及其逆矩陣像是矩陣row操作的一種運算基本單元。</p>
+<h4 id="row-equivalentrow等價">Row equivalent(row等價)</h4>
+<blockquote>
+<p>Matrices A and B are said to be <em>row equivalent</em> if either can
+be obtained from the other by a sequence of elementary row
+operation.</p>
+<p>Row等價的兩個矩陣可以通過一系列ERO得到對方，若A---EROs---&gt;B,即B =
+(En·En-1·...·E2·E1)·A，那麽相對應的A&lt;---EROs---B,有A=(E1<sup>-1·E2</sup>-1·...·En-1<sup>-1·En</sup>-1)B</p>
+</blockquote>
+<h4
+id="equivalent-statements-about-square-matrix關於方陣的等價表達">Equivalent
+statements about square matrix(關於方陣的等價表達)</h4>
+<p><img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210327172700.png" /></p>
+<p>以下表達要麽同時T要麽同時F</p>
+<blockquote>
+<p>if A is an n-by-n matrix, then the fellowing are equivalent</p>
+<p>&lt;a&gt;A is invertibel</p>
+<p>&lt;b&gt;A·X = 0 has only the trivial solution</p>
+<p>&lt;c&gt;The RREF of A is In</p>
+<p>&lt;d&gt;A is expressible as a product of elementary matrices</p>
+</blockquote>
+<p><strong>Proof:</strong>
+證明多條表達互相等價時，證明其形成一個閉環即可。</p>
+<ul>
+<li><p>proof of a=&gt;b (方陣A可逆時，A·X = 0必只有原點一解)</p>
+<blockquote>
+<p>let K be the solution set of A·X = 0, then</p>
+<p>∀x∈K,A·x = 0</p>
+<p>=&gt; A^-1(A·x) = A^-1·0</p>
+<p>=&gt; (A^-1·A)·x = 0</p>
+<p>運用可逆特性</p>
+<p>=&gt; I·x=0</p>
+<p>=&gt; x=0</p>
+</blockquote>
+<p>證明思路：由可逆引入逆矩陣推得解集K的唯一解為原點解(trivial)</p></li>
+<li><p>proof of b=&gt;c (方程A·X =
+0只有原點解時方陣A的RREF是單位矩陣)</p>
+<blockquote>
+<p>let R be the RREF of the m-by-n matrix A, then by theorem, either R
+has a row of zeros or R=In</p>
+<p>If R has a row of zeros then RX=0 has infinitely many
+solution.(有一row為0的話缺失一個條件，會多出一個free
+variable導致無窮多解)</p>
+<p>=&gt; AX=0 has infinitely many
+solutions(與AX=0只有原點解得前提矛盾，說明R(A的RREF)是一個單位矩陣。得證)</p>
+<p>=&gt; R = In</p>
+</blockquote>
+<p>證明思路：因為方陣的RREF只有兩種可能性，這邊討論說明一row為0的情況與條件衝突，故只可能是單位矩陣，得證。</p></li>
+<li><p>proof of c=&gt;d
+(方陣A的RREF是單位矩陣時，A可以用基本矩陣的乘積表達)</p>
+<blockquote>
+<p>By theorem, there exist elementary matrices E1,E2,...,Ek such
+that</p>
+<p>R = (Ek · Ek-1 · ... · E2 · E1)·A
+因為A的RREF是單位矩陣，即R是單位矩陣 =&gt; R = In = (Ek · Ek-1 · ... ·
+E2 · E1)·A</p>
+<p>=&gt; (E1^-1 · E2^-1 ·...· Ek-1^-1 · Ek^-1)· I = (E1^-1 · E2^-1 ·...·
+Ek-1^-1 · Ek^-1)·(Ek · Ek-1 · ... · E2 · E1)·A
+又依據矩陣乘法之結合律化簡 =&gt; E1^-1 · E2^-1 ·...· Ek-1^-1 · Ek^-1 = A
+i.e. 矩陣A表達為了單位矩陣的乘積</p>
+</blockquote>
+<p>證明思路：先用基本矩陣表達方陣A通過ERO轉化為單位矩陣的過程，再獨立出A於等式一邊後化簡即得證。其實這個命題非常直觀，A可以由一系列操作E轉化為單位矩陣，那麽A當然可以用單位矩陣通過一系列E^-1還原為A，即一系列E的乘積。</p></li>
+<li><p>proof of d=&gt;a
+(方陣A若能用一系列基本矩陣的乘積表達，則A可逆)</p>
+<blockquote>
+<p>A = E1^-1 · E2^-1 ·...· Ek-1^-1 · Ek^-1</p>
+<p>=&gt; (Ek · Ek-1 · ... · E2 · E1) · A = (Ek · Ek-1 · ... · E2 · E1) ·
+(E1^-1 · E2^-1 ·...· Ek-1^-1 · Ek^-1)</p>
+<p>=&gt; (Ek · Ek-1 · ... · E2 · E1) · A = I</p>
+<p>i.e. A^-1 = (Ek · Ek-1 · ... · E2 · E1), A is invertible</p>
+</blockquote>
+<p>證明思路：由“方陣A若能用一系列基本矩陣的乘積表達”這一特點列式，接着通過E^-1和矩陣乘法結合律往可逆矩陣定義上靠攏而得證。</p></li>
+</ul>
+<p><strong>注意：</strong> * 方陣A不可逆時，AX=0會有無窮多組解。 ---</p>
+<h2 id="尋找逆矩陣的一種方法">尋找逆矩陣的一種方法</h2>
+<p>上一篇文章已經介紹過，即： <img
+src="https://cdn.jsdelivr.net/gh/ZSZYoung/Images-Host@main/blog/images20210325222335.png" /></p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2021-03-26</span><i class="fa fa-tag"></i><a class="tag" href="/tags/Linear-Algebra/" title="Linear Algebra">Linear Algebra </a><span class="leancloud_visitors"></span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://r0y.tech/2021/03/26/LA筆記-四-Elementary-matrix-and-a-method-for-finding-inverse-matrix/,Roy's Blog,LA筆記:(四)Elementary matrix and a method for finding inverse matrix,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2021/03/27/LA%E7%AD%86%E8%A8%98-%E4%BA%94-More-on-linear-system-and-Invertible-matrices/" title="LA筆記:(五)More on linear system and Invertible matrices">Prev</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2021/03/25/LA%E7%AD%86%E8%A8%98-%E4%B8%89-Inverse-Algebra-properties-of-matrix/" title="LA筆記:(三)Inverse,Algebra(properties of matrix)">Next</a></li></ul></div><script src="/js/visitors.js"></script><a id="comments"></a><div id="vcomments" style="margin:0 30px;"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/gh/xcss/valine@latest/dist/Valine.min.js"></script><script>var valine = new Valine({
+  el:'#vcomments',
+  notify:true || false, 
+  verify:false|| false, 
+  app_id:'LP5EBVNHfkmn17seVBnFrDIB-gzGzoHsz',
+  app_key:'I1QAQGHsA6reNM2I3lwh3P8t',
+  lang:'en',
+  placeholder:'May the force be with you.',
+  path: window.location.pathname,
+  serverURLs: '',
+  visitor:true,
+  recordIP:true,
+  avatar:'mp'
+})</script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script src="/js/baidu-tongji.js"></script></body></html>
