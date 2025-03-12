@@ -19,6 +19,15 @@ p {
   font-size: 15px;
 }
 
+/* newly added for content font-size controling */
+.post .post-content p {
+  font-size: 16px; /* 調整為你想要的字體大小 */
+}
+
+/*------------*/
+
+
+
 a {
   text-decoration: none;
 }
